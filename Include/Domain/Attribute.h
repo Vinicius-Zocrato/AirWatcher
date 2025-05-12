@@ -6,9 +6,21 @@
 
 using namespace std;
 
+class Attribute {
+    public:
+        Attribute();
+        ~Attribute();
+        Attribute(string attributeID, string unit, string description);
+        void toString() const;
+
+    private:
+        string attributeID;
+        string unit;
+        string description;
 class Attribute
 {
 public:
+    Attribute(string attributeID, string unit, string description);
     Attribute();
     ~Attribute();
     void setAttributeID(const string &attributeID) { this->attributeID = attributeID; }
