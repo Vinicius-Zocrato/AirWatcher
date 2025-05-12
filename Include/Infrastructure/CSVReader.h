@@ -21,6 +21,13 @@ public:
     vector<Provider> loadProviders(const string &filename) const;
     vector<Cleaner> loadCleaners(const string &filename) const;
 
+    const std::vector<Sensor>&      getSensors() ;
+    const std::vector<Measurement>& getMeasurements() ;
+    const std::vector<User>&        getUsers() ;
+    const std::vector<Provider>&    getProviders() ;
+    const std::vector<Cleaner>&     getCleaners() ;
+    const std::vector<Attribute>&   getAttributes() ;
+
 private:
     vector<Sensor> sensors;
     vector<Measurement> measurements;
