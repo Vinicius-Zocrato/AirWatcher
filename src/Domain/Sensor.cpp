@@ -3,11 +3,11 @@ Sensor::Sensor() {
 
 }
 
-Sensor::Sensor(string sensorID, float lat, float longitude, bool status = true) {
+Sensor::Sensor(string sensorID, float lat, float longitude) {
     this->sensorID = sensorID;
     this->latitude = lat;
     this->longitude = longitude;
-    this->status = status;
+    this->status = true;
 }
 
 
