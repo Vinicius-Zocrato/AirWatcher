@@ -8,6 +8,7 @@ class Attribute {
     public:
         Attribute();
         ~Attribute();
+        Attribute(string attributeID, string unit, string description);
     private:
         string attributeID;
         string unit;
