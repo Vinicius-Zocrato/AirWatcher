@@ -12,17 +12,16 @@
 class CSVReader
 {
 public:
-    CSVReader(const string &filename);
+    CSVReader();
     ~CSVReader();
 
-    vector<Sensor> loadSensors() const;
-    vector<Measurement> loadMeasurements() const;
-    vector<User> loadUsers() const;
-    vector<Provider> loadProviders() const;
-    vector<Cleaner> loadCleaners() const;
+    vector<Sensor> loadSensors(const string &filename) const;
+    vector<Measurement> loadMeasurements(const string &filename) const;
+    vector<User> loadUsers(const string &filename) const;
+    vector<Provider> loadProviders(const string &filename) const;
+    vector<Cleaner> loadCleaners(const string &filename) const;
 
 private:
-    string filename;
     vector<Sensor> sensors;
     vector<Measurement> measurements;
     vector<User> users;
