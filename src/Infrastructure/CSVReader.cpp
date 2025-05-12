@@ -97,7 +97,33 @@ vector<Measurement> CSVReader::loadMeasurements(const string &filename) const
 vector<User> CSVReader::loadUsers(const string &filename) const
 {
     vector<User> users;
-    // Load users from CSV file
+    // THE CSV FILE FORMAT: userID, sensorID
+    // The attribute "score" is not included in the CSV file
+    // It is set to 0 by default in the constructor of the User class
+    // The attribute "isReliable" is not included in the CSV file
+    // It is set to true by default in the constructor of the User class
+
+    ifstream file(filename);
+    if (!file.is_open())
+    {
+        cerr << "Could not open the file!" << endl;
+        return {};
+    }
+    string line;
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string userId;
+        string sensorID;
+
+        getline(ss, userId, ';');
+        getline(ss, sensorID, ';');
+
+        User user;
+        user.setUserId(userId);
+
+        users.push_back(user);
+    }
     return users;
 }
 
