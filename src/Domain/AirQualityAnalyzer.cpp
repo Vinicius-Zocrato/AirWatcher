@@ -11,6 +11,11 @@ AirQualityAnalyzer::AirQualityAnalyzer()
 
 }
 
+AirQualityAnalyzer::AirQualityAnalyzer(vector<Sensor> sensors)
+{
+    this->sensors = sensors;
+}
+
 double AirQualityAnalyzer::calculateSimilarity() {
     // TODO
     return 0.0;
