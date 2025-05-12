@@ -3,7 +3,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -I../Include -I../Include/Domain -I../Include/Presentation
 
-SRC = tests.cpp
+SRC = testsunitaires.cpp
 OUT = tests
 
 all: $(OUT)
