@@ -16,6 +16,7 @@ public:
     vector<Sensor> getAssociatedSensors() const;
     void updateScore();
     void changeRealisable();
+    bool getIsReliable() const;
 
 
 private:

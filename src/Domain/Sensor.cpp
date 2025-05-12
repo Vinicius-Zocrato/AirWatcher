@@ -24,10 +24,12 @@ void Sensor::setStatus(){
 }
 
 vector<Measurement> Sensor::getMeasurementPeriod(string init, string final){ //not implemented yet
+
     
 
     return this->measurements;
 }
+
 
 float Sensor::getLatitude(){
     return this->latitude;
@@ -37,6 +39,6 @@ float Sensor::getLongitude(){
     return this->longitude;
 }
 
-float Sensor::getStatus(){
+bool Sensor::getStatus(){
     return this->status;
 }

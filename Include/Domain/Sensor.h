@@ -32,13 +32,14 @@ public:
 
     vector<Measurement> getMeasurementPeriod(string init, string final); //not implemented yet
 
+
     void setStatus();
 
     float getLatitude();
 
     float getLongitude();
 
-    float getStatus();
+    bool getStatus() const ;
 };
 
 #endif

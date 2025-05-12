@@ -7,7 +7,7 @@ using namespace std;
 
 class Measurement {
     public:
-        Measurement(const std::string& timestamp, const Attribute& attribute, float value)
+        Measurement(const string& timestamp, const Attribute& attribute, float value)
             : timestamp(timestamp), attribute(attribute), value(value) {}
         Measurement(const Measurement& other)
             : timestamp(other.timestamp), attribute(other.attribute), value(other.value) {}

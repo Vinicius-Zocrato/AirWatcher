@@ -22,3 +22,7 @@ void User::updateScore() {
 void User::changeRealisable() {
     isReliable = !isReliable;
 }
+
+bool User::getIsReliable() const {
+    return isReliable;
+}
