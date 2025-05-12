@@ -1,24 +1,34 @@
 #include "../../Include/Domain/User.h"
 #include "../../Include/Domain/Sensor.h"
 
-
 User::User()
-    : userId(""), score(0), isReliable(true) {
-    
+    : userId(""), score(0), isReliable(true)
+{
 }
 
-User::~User() {
+// Destructeur
+User::~User()
+{
 }
 
-vector<Sensor> User::getAssociatedSensors() const {
+// Renvoie la liste des capteurs associés
+vector<Sensor> User::getAssociatedSensors() const
+{
     return associatedSensors;
 }
 
-
-void User::updateScore() {
+void User::updateScore()
+{
+    // Exemple : augmenter le score de 1
     score += 1;
 }
 
-void User::changeRealisable() {
+void User::changeRealisable()
+{
     isReliable = !isReliable;
+}
+
+string User::getUserId() const
+{
+    return userId;
 }
