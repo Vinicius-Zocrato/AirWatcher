@@ -20,6 +20,7 @@ class Attribute {
 class Attribute
 {
 public:
+    Attribute(string attributeID, string unit, string description);
     Attribute();
     ~Attribute();
     void setAttributeID(const string &attributeID) { this->attributeID = attributeID; }
