@@ -15,20 +15,11 @@ public:
     CSVReader();
     ~CSVReader();
 
-<<<<<<< HEAD
     vector<Sensor> loadSensors(const string &filename) const;
     vector<Measurement> loadMeasurements(const string &filename) const;
     vector<User> loadUsers(const string &filename) const;
     vector<Provider> loadProviders(const string &filename) const;
     vector<Cleaner> loadCleaners(const string &filename) const;
-=======
-    vector<Sensor> loadSensors() ;
-    vector<Measurement> loadMeasurements() ;
-    vector<User> loadUsers() ;
-    vector<Provider> loadProviders() ;
-    vector<Cleaner> loadCleaners() ;
-    vector<Attribute> loadAttributes() ;
->>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
 
 private:
     vector<Sensor> sensors;

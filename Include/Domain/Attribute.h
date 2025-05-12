@@ -6,7 +6,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
 class Attribute
 {
 public:
@@ -20,17 +19,6 @@ private:
     string attributeID;
     string unit;
     string description;
-=======
-class Attribute {
-    public:
-        Attribute();
-        ~Attribute();
-        Attribute(string attributeID, string unit, string description);
-    private:
-        string attributeID;
-        string unit;
-        string description;
->>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
 };
 
 istream &operator>>(istream &is, Attribute &attr)
