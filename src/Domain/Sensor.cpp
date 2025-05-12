@@ -13,12 +13,16 @@ Sensor::Sensor() {
 
 }
 
+<<<<<<< HEAD
 Sensor::Sensor(string sensorID, float lat, float longitude, bool status = true) {
 >>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
+=======
+Sensor::Sensor(string sensorID, float lat, float longitude) {
+>>>>>>> 7787ca97a99465dd459c6706c5380fd28d67f1bc
     this->sensorID = sensorID;
     this->latitude = lat;
     this->longitude = longitude;
-    this->status = status;
+    this->status = true;
 }
 
 Sensor::~Sensor()
