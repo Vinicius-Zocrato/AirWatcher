@@ -9,6 +9,8 @@ class Attribute {
         Attribute();
         ~Attribute();
         Attribute(string attributeID, string unit, string description);
+        void toString() const;
+
     private:
         string attributeID;
         string unit;
