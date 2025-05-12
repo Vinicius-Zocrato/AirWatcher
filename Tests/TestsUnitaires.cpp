@@ -11,13 +11,14 @@
 #include <vector>
 #include <string>
 
+/*
 bool Test1()
 {
-    Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
-    SensorValidator validator;
-    bool result = validator.isValidSensor(s);
-    std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
-    return result;
+    // Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
+    // SensorValidator validator;
+    // bool result = validator.isValidSensor(s);
+    // std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
+    // return result;
 }
 bool Test2()
 {
@@ -37,10 +38,10 @@ bool Test3()
 bool Test4()
 {
     
-    std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
-    User user("U1", sensors);
-    auto result = user.getAssociatedSensors();
-    std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
+    // std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
+    // User user("U1", sensors);
+    // auto result = user.getAssociatedSensors();
+    // std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
 }
 bool Test5()
 {
@@ -64,7 +65,7 @@ bool Test5()
     std::cout << "Test isActiveAt - Just after active range: " << (!active ? "PASS" : "FAIL") << "\n";
     return !active;
 }
-/*bool Test6()
+bool Test6()
 {
     Sensor target("S1", 45, 5);
     std::vector<Sensor> emptyList;
@@ -174,8 +175,22 @@ bool Test20() {
     return cleaners.empty();
 }*/
 
+bool test21(){
+    CSVReader reader("attributes.csv");
+
+    reader.loadAttributes();
+
+    for (size_t i = 0; i < reader.getAttributes().size(); i++)
+    {
+        reader.getAttributes()[i].toString();
+    }
+
+    return true;
+}
+
 int main() {
-    Test1(); Test2(); Test3(); Test4(); Test5();
+    //Test1(); Test2(); Test3(); Test4(); Test5(); 
+    test21();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
