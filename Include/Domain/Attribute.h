@@ -12,6 +12,5 @@ class Attribute {
         string attributeID;
         string unit;
         string description;
-
 };
 #endif // Attribute_H
