@@ -29,11 +29,12 @@ public:
 
     void addMeasurement(Measurement measurement);
 
-    vector<Measurement> getMeasurements();
+    vector<Measurement> getMeasurements() const;
 
     vector<Measurement> getMeasurementPeriod(string init, string final); // not implemented yet
 
     void setStatus();
+    string getId() const;
 
     float getLatitude();
 
