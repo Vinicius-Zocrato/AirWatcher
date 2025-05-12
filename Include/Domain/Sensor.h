@@ -22,7 +22,7 @@ private:
 public:
     Sensor();
 
-    Sensor(string sensorID, float lat, float lon, bool status);
+    Sensor(string sensorID, float lat, float lon);
 
     ~Sensor();
 

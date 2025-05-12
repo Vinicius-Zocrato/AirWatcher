@@ -11,6 +11,7 @@ class Sensor; // Déclaration anticipée de la classe Sensor si elle est défini
 class User {
 public:
     User();
+    User(string userId, vector<Sensor> associatedSensors);
     ~User();
     vector<Sensor> getAssociatedSensors() const;
     void updateScore();
