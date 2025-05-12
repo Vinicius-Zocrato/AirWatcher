@@ -43,7 +43,6 @@ float Sensor::getLongitude(){
     return this->longitude;
 }
 
-bool Sensor::getStatus(){
 bool Sensor::getStatus() const{
     return this->status;
 }

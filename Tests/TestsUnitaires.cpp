@@ -14,11 +14,11 @@
 /*
 bool Test1()
 {
-    Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
-    SensorValidator validator;
-    bool result = validator.isValidSensor(s);
-    std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
-    return result;
+    // Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
+    // SensorValidator validator;
+    // bool result = validator.isValidSensor(s);
+    // std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
+    // return result;
 }
 bool Test2()
 {
@@ -38,10 +38,10 @@ bool Test3()
 bool Test4()
 {
     
-    std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
-    User user("U1", sensors);
-    auto result = user.getAssociatedSensors();
-    std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
+    // std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
+    // User user("U1", sensors);
+    // auto result = user.getAssociatedSensors();
+    // std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
 }
 bool Test5()
 {
