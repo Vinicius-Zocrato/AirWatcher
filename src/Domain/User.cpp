@@ -6,7 +6,6 @@ User::User()
 {
 }
 
-<<<<<<< HEAD
 // Destructeur
 User::~User()
 {
@@ -21,17 +20,6 @@ vector<Sensor> User::getAssociatedSensors() const
 void User::updateScore()
 {
     // Exemple : augmenter le score de 1
-=======
-User::~User() {
-}
-
-vector<Sensor> User::getAssociatedSensors() const {
-    return associatedSensors;
-}
-
-
-void User::updateScore() {
->>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
     score += 1;
 }
 
