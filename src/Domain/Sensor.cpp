@@ -1,4 +1,5 @@
 #include "../../Include/Domain/Sensor.h"
+<<<<<<< HEAD
 
 Sensor::Sensor()
 {
@@ -7,6 +8,13 @@ Sensor::Sensor()
 Sensor::Sensor(string sensorID, float lat, float longitude, bool status, string userID)
 {
     this->userID = userID;
+=======
+Sensor::Sensor() {
+
+}
+
+Sensor::Sensor(string sensorID, float lat, float longitude, bool status = true) {
+>>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
     this->sensorID = sensorID;
     this->latitude = lat;
     this->longitude = longitude;

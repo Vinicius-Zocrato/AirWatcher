@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -10,8 +11,9 @@ using namespace std;
 class Cleaner {
 public:
     Cleaner();
+    Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStampStart, tm TimeStampStop);
     ~Cleaner();
-    bool isActiveAt();
+    bool isActiveAt(time_t time);
     double estimatedImpact();
 
 
@@ -20,8 +22,8 @@ private:
     string CleanerId;
     float Latitude;
     float Longitude;
-    string TimeStampStart;
-    string TimeStampStop;
+    tm TimeStampStart;
+    tm TimeStampStop;
 };
 
 #endif // Cleaner_H
