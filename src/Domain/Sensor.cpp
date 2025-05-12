@@ -1,6 +1,4 @@
 #include "../../Include/Domain/Sensor.h"
-
-
 Sensor::Sensor() {
 
 }
