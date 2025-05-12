@@ -1,6 +1,9 @@
 #include "SensorValidator.h"
 #include <cmath>
 #include <iostream>
+#include "User.h"
+#include "Sensor.h"
+#include "Measurement.h"
 
 using namespace std;
 
@@ -19,7 +22,7 @@ bool SensorValidator::getIsUserReliable() const {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
-    return isUserReliable;
+    return isValidSensor;
 }
 
 std::vector<User> SensorValidator::getMaliciousUsers() const {
@@ -34,6 +37,8 @@ bool SensorValidator::isValidSensor(const Sensor& sensor) {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
+    return sensor.getStatus();
+
 
 }
 
@@ -42,7 +47,7 @@ bool SensorValidator::isUserReliable(const User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
-
+    return user.getIsReliable();
 }
 
 // Méthode : Détecte les utilisateurs malveillants
