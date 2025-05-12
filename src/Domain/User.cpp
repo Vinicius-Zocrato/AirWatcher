@@ -26,3 +26,7 @@ void User::changeRealisable() {
 bool User::getIsReliable() const {
     return isReliable;
 }
+
+bool User::getIsReliable() const {
+    return isReliable;
+}

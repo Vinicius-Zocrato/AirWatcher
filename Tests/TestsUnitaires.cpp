@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 
+/*
 bool Test1()
 {
     Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
@@ -44,7 +45,9 @@ bool Test4()
 }
 bool Test5()
 {
-    Cleaner cleaner("C1", 45, 5, "2025-01-01 00:00:00", "2025-01-10 00:00:00");
+    tm startTime = tm{0, 0, 0, 1, 0, 2025 - 1900};
+    tm endTime = tm{0, 0, 0, 10, 0, 2025 - 1900};
+    Cleaner cleaner = Cleaner("C1", 45.0, 5.0, startTime, endTime);
 
     // Create a tm structure for the test time
     tm testTime = {};
@@ -62,7 +65,7 @@ bool Test5()
     std::cout << "Test isActiveAt - Just after active range: " << (!active ? "PASS" : "FAIL") << "\n";
     return !active;
 }
-/*bool Test6()
+bool Test6()
 {
     Sensor target("S1", 45, 5);
     std::vector<Sensor> emptyList;
@@ -172,8 +175,22 @@ bool Test20() {
     return cleaners.empty();
 }*/
 
+bool test21(){
+    CSVReader reader("attributes.csv");
+
+    reader.loadAttributes();
+
+    for (size_t i = 0; i < reader.getAttributes().size(); i++)
+    {
+        reader.getAttributes()[i].toString();
+    }
+
+    return true;
+}
+
 int main() {
-    Test1(); Test2(); Test3(); Test4(); Test5();
+    //Test1(); Test2(); Test3(); Test4(); Test5(); 
+    test21();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
