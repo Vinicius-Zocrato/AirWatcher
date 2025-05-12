@@ -14,8 +14,7 @@ Sensor::~Sensor()
 {
 }
 
-vector<Measurement> Sensor::getMeasurements()
-{
+vector<Measurement> Sensor::getMeasurements() const{
     return this->measurements;
 }
 
@@ -40,7 +39,10 @@ float Sensor::getLongitude()
     return this->longitude;
 }
 
-float Sensor::getStatus()
-{
+string Sensor::getId() const{
+    return this->sensorID;
+}
+
+float Sensor::getStatus(){
     return this->status;
 }

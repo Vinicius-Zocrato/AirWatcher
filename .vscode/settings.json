@@ -45,7 +45,6 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-<<<<<<< HEAD
         "array": "cpp",
         "cstdarg": "cpp",
         "cwctype": "cpp",
@@ -55,10 +54,11 @@
         "functional": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
+        "optional": "cpp",
         "random": "cpp",
-=======
->>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
+        "string_view": "cpp",
         "fstream": "cpp",
+        "numbers": "cpp",
         "sstream": "cpp"
     }
 }
