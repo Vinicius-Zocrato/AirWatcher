@@ -18,6 +18,10 @@ public:
     void updateScore();
     void changeRealisable();
     string getUserId() const;
+    void setUserId(const string &userId) { this->userId = userId; }
+    void setAssociatedSensors(const vector<Sensor> &associatedSensors) { this->associatedSensors = associatedSensors; }
+    void setScore(int score) { this->score = score; }
+    void setIsReliable(bool isReliable) { this->isReliable = isReliable; }
 
 private:
     string userId;
