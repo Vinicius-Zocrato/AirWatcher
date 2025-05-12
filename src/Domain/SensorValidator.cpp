@@ -5,8 +5,7 @@
 using namespace std;
 
 // Constructeur
-SensorValidator::SensorValidator()
-    : isValidSensor(false), isUserReliable(true) {}
+SensorValidator::SensorValidator() {}
 
 // Getters
 bool SensorValidator::getIsValidSensor() const {
