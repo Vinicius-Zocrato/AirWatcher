@@ -164,3 +164,27 @@ std::vector<Attribute> CSVReader::loadAttributes() {
 
     return attributes;
 }
+
+const std::vector<Sensor>& CSVReader::getSensors()  {
+    return sensors;
+}
+
+const std::vector<Measurement>& CSVReader::getMeasurements()  {
+    return measurements;
+}
+
+const std::vector<User>& CSVReader::getUsers()  {
+    return users;
+}
+
+const std::vector<Provider>& CSVReader::getProviders()  {
+    return providers;
+}
+
+const std::vector<Cleaner>& CSVReader::getCleaners()  {
+    return cleaners;
+}
+
+const std::vector<Attribute>& CSVReader::getAttributes()  {
+    return attributes;
+}

@@ -1,4 +1,5 @@
 #include "../../Include/Domain/Attribute.h"
+#include <iostream>
 
 Attribute::Attribute() {
     this->attributeID = "";
@@ -13,4 +14,11 @@ Attribute::Attribute(string attributeID, string unit, string description){
 }
 
 Attribute::~Attribute() {
+}
+
+void Attribute::toString() const {
+    std::cout << "AttributeID: " << attributeID
+              << ", Unit: "       << unit
+              << ", Description: "<< description
+              << std::endl;
 }
