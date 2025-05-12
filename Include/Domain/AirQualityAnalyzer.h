@@ -15,6 +15,7 @@ private:
 public:
 
     AirQualityAnalyzer();
+    AirQualityAnalyzer(vector<Sensor> sensors);
     double calculateAirQuality();
     double calculateSimilarity(const std::vector<Measurement>& m1,
     const std::vector<Measurement>& m2);
