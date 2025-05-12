@@ -15,11 +15,12 @@ public:
     CSVReader();
     ~CSVReader();
 
-    vector<Sensor> loadSensors(const string &filename) const;
-    vector<Measurement> loadMeasurements(const string &filename) const;
-    vector<User> loadUsers(const string &filename) const;
-    vector<Provider> loadProviders(const string &filename) const;
-    vector<Cleaner> loadCleaners(const string &filename) const;
+    vector<Sensor> loadSensors(const string &filename) ;
+    vector<Measurement> loadMeasurements(const string &filename) ;
+    vector<User> loadUsers(const string &filename) ;
+    vector<Provider> loadProviders(const string &filename) ;
+    vector<Cleaner> loadCleaners(const string &filename) ;
+    vector<Cleaner> loadAttributes(const string &filename) ;
 
     const std::vector<Sensor>&      getSensors() ;
     const std::vector<Measurement>& getMeasurements() ;
@@ -37,4 +38,4 @@ private:
     vector<Attribute> attributes;
 };
 
-#endif // CSVREADER_H
+#endif // CSVREADE
