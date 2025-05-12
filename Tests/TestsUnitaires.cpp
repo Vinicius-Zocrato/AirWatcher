@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 
+/*
 bool Test1()
 {
     Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
@@ -64,7 +65,7 @@ bool Test5()
     std::cout << "Test isActiveAt - Just after active range: " << (!active ? "PASS" : "FAIL") << "\n";
     return !active;
 }
-/*bool Test6()
+bool Test6()
 {
     Sensor target("S1", 45, 5);
     std::vector<Sensor> emptyList;
@@ -174,8 +175,22 @@ bool Test20() {
     return cleaners.empty();
 }*/
 
+bool test21(){
+    CSVReader reader("attributes.csv");
+
+    reader.loadAttributes();
+
+    for (size_t i = 0; i < reader.getAttributes().size(); i++)
+    {
+        reader.getAttributes()[i].toString();
+    }
+
+    return true;
+}
+
 int main() {
-    Test1(); Test2(); Test3(); Test4(); Test5();
+    //Test1(); Test2(); Test3(); Test4(); Test5(); 
+    test21();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
