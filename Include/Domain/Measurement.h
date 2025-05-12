@@ -3,7 +3,7 @@
 #include <string>
 #include "Attribute.h"
 
-#using namespace std;
+using namespace std;
 
 class Measurement {
     public:
@@ -15,7 +15,7 @@ class Measurement {
     Measurement();
     ~Measurement();
     private:
-    String timestamp;
+    string timestamp;
     Attribute attribute;
     float value;
 };
