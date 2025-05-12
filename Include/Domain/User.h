@@ -12,6 +12,7 @@ class User
 {
 public:
     User();
+    User(string userId, vector<Sensor> associatedSensors);
     ~User();
     vector<Sensor> getAssociatedSensors() const;
     void updateScore();

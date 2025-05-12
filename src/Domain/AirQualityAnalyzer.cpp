@@ -1,0 +1,27 @@
+#include "../../Include/Domain/AirQualityAnalyzer.h"
+
+
+double AirQualityAnalyzer::calculateAirQuality() {
+    // TODO
+    return 0.0;
+}
+
+double AirQualityAnalyzer::calculateSimilarity() {
+    // TODO
+    return 0.0;
+}
+
+std::vector<Sensor> AirQualityAnalyzer::findMostSiminarSensors() {
+    // TODO
+    return {};
+}
+
+double AirQualityAnalyzer::computeAvarege() {
+    // TODO
+    return 0.0;
+}
+
+std::vector<Sensor> AirQualityAnalyzer::rankSensorByQuality() {
+    // TODO
+    return {};
+}

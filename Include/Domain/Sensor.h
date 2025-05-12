@@ -3,6 +3,10 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include "Measurement.h"
 using namespace std;
 
@@ -19,7 +23,11 @@ private:
 public:
     Sensor();
 
+<<<<<<< HEAD
     Sensor(string sensorID, float lat, float lon, bool status, string userID);
+=======
+    Sensor(string sensorID, float lat, float lon);
+>>>>>>> 7315d89dcce92ce9c7fd458bc2ee1139c85479a0
 
     ~Sensor();
 
