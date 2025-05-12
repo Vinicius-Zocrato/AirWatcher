@@ -12,22 +12,22 @@
 class CSVReader
 {
 public:
-    CSVReader(const std::string &filename);
+    CSVReader(const string &filename);
     ~CSVReader();
 
-    std::vector<Sensor> loadSensors() const;
-    std::vector<Measurement> loadMeasurements() const;
-    std::vector<User> loadUsers() const;
-    std::vector<Provider> loadProviders() const;
-    std::vector<Cleaner> loadCleaners() const;
+    vector<Sensor> loadSensors() const;
+    vector<Measurement> loadMeasurements() const;
+    vector<User> loadUsers() const;
+    vector<Provider> loadProviders() const;
+    vector<Cleaner> loadCleaners() const;
 
 private:
-    std::string filename;
-    std::vector<Sensor> sensors;
-    std::vector<Measurement> measurements;
-    std::vector<User> users;
-    std::vector<Provider> providers;
-    std::vector<Cleaner> cleaners;
+    string filename;
+    vector<Sensor> sensors;
+    vector<Measurement> measurements;
+    vector<User> users;
+    vector<Provider> providers;
+    vector<Cleaner> cleaners;
 };
 
 #endif // CSVREADER_H
