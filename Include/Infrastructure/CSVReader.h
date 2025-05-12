@@ -20,6 +20,7 @@ public:
     vector<User> loadUsers() const;
     vector<Provider> loadProviders() const;
     vector<Cleaner> loadCleaners() const;
+    vector<Attribute> loadAtributes() const;
 
 private:
     string filename;
@@ -28,6 +29,7 @@ private:
     vector<User> users;
     vector<Provider> providers;
     vector<Cleaner> cleaners;
+    vector<Attribute> atributes;
 };
 
 #endif // CSVREADER_H
