@@ -13,7 +13,7 @@
 
 bool Test1()
 {
-    Sensor s("S", -999.0, 999.0); // clearly invalid coordinates
+    Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
     SensorValidator validator;
     bool result = validator.isValidSensor(s);
     std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
@@ -43,10 +43,23 @@ bool Test4()
 }
 bool Test5()
 {
-    AirCleaner cleaner("C1", 45, 5, "2025-01-01 00:00:00", "2025-01-10 00:00:00");
-    auto testTime = parseDateTime("2025-01-10 00:00:01"); // just after
-    bool active = cleaner.isActiveAt(testTime);
+    Cleaner cleaner("C1", 45, 5, "2025-01-01 00:00:00", "2025-01-10 00:00:00");
+
+    // Create a tm structure for the test time
+    tm testTime = {};
+    testTime.tm_year = 2025 - 1900; // tm_year is years since 1900
+    testTime.tm_mon = 0;            // January (0-based)
+    testTime.tm_mday = 10;
+    testTime.tm_hour = 0;
+    testTime.tm_min = 0;
+    testTime.tm_sec = 1;
+
+    // Convert tm to time_t
+    time_t testTimeT = std::mktime(&testTime);
+
+    bool active = cleaner.isActiveAt(testTimeT);
     std::cout << "Test isActiveAt - Just after active range: " << (!active ? "PASS" : "FAIL") << "\n";
+    return !active;
 }
 bool Test6()
 {
