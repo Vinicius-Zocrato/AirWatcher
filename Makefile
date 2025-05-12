@@ -18,24 +18,29 @@ SRC_DIR = src
 #dossier contenant les .h
 INCLUDE_DIR = Include
 
+#sous dossier
+INCLUDE_DIRS := $(shell find $(INCLUDE_DIR) -type d)
+CXXFLAGS += $(addprefix -I, $(INCLUDE_DIRS))
+
 #dossier pour les .o 
-OBJ_DIR = Data
+OBJ_DIR = out
 
 #liste des fichiers dans SRC_DIR
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+SOURCES = $(shell find $(SRC_DIR) -name "*.cpp")
 
 #liste des fichiers dans INCLUDE_DIR 
-HEADERS = $(wildcard $(INCLUDE_DIR)/*.h)
+HEADERS = $(shell find $(INCLUDE_DIR) -name "*.h")
 
 #liste des fichiers dans OBJ_DIR
-OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SOURCES))
+OBJECTS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(subst $(SRC_DIR)/,,$(SOURCES)))
 
 #règle pour construire l'exécutable
 $(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET)
+	$(CXX) $(OBJECTS) -o $@
 
 #régple pour compiler de cpp à .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 #regle executé lorsque qu'on appelle le makefile  
@@ -43,7 +48,8 @@ all: $(TARGET)
 
 #nettoie le fichier executable et les .o
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	rm -f $(TARGET)
+	rm -rf $(OBJ_DIR)
 
 
 
