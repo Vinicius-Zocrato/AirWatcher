@@ -6,6 +6,11 @@ double AirQualityAnalyzer::calculateAirQuality() {
     return 0.0;
 }
 
+AirQualityAnalyzer::AirQualityAnalyzer()
+{
+    
+}
+
 double AirQualityAnalyzer::calculateSimilarity() {
     // TODO
     return 0.0;
@@ -24,4 +29,9 @@ double AirQualityAnalyzer::computeAvarege() {
 std::vector<Sensor> AirQualityAnalyzer::rankSensorByQuality() {
     // TODO
     return {};
+}
+
+Sensor AirQualityAnalyzer::findSensorById(string const capteurId) const
+{
+
 }
