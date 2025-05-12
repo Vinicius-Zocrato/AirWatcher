@@ -17,6 +17,7 @@ public:
     void updateScore();
     void changeRealisable();
     bool getIsReliable() const;
+    bool getIsReliable() const;
 
 
 private:

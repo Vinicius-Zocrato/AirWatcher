@@ -12,18 +12,23 @@
 class CSVReader
 {
 public:
-    CSVReader(const string &filename);
+    CSVReader();
     ~CSVReader();
 
-    vector<Sensor> loadSensors() ;
-    vector<Measurement> loadMeasurements() ;
-    vector<User> loadUsers() ;
-    vector<Provider> loadProviders() ;
-    vector<Cleaner> loadCleaners() ;
-    vector<Attribute> loadAttributes() ;
+    vector<Sensor> loadSensors(const string &filename) const;
+    vector<Measurement> loadMeasurements(const string &filename) const;
+    vector<User> loadUsers(const string &filename) const;
+    vector<Provider> loadProviders(const string &filename) const;
+    vector<Cleaner> loadCleaners(const string &filename) const;
+
+    const std::vector<Sensor>&      getSensors() ;
+    const std::vector<Measurement>& getMeasurements() ;
+    const std::vector<User>&        getUsers() ;
+    const std::vector<Provider>&    getProviders() ;
+    const std::vector<Cleaner>&     getCleaners() ;
+    const std::vector<Attribute>&   getAttributes() ;
 
 private:
-    string filename;
     vector<Sensor> sensors;
     vector<Measurement> measurements;
     vector<User> users;
