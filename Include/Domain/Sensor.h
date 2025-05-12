@@ -18,7 +18,7 @@ private:
 public:
     Sensor();
 
-    Sensor(string sensorID, float lat, float long, bool status);
+    Sensor(string sensorID, float lat, float lon, bool status);
 
     ~Sensor();
 };
