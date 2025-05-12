@@ -2,7 +2,7 @@
 #include "../Include/Domain/Attribute.h"
 #include "../Include/Domain/Sensor.h"
 #include "../Include/Domain/SensorValidator.h"
-#include "../Include/Domain/AirQualityAnalizer.h"
+#include "../Include/Domain/AirQualityAnalyzer.h"
 #include "../Include/Domain/User.h"
 #include "../Include/Presentation/ConsoleUI.h"
 #include "../Include/Infrastructure/CSVReader.h"
@@ -13,7 +13,7 @@
 
 bool Test1()
 {
-    Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
+    Sensor s("S", -999.0, 999.0); // clearly invalid coordinates
     SensorValidator validator;
     bool result = validator.isValidSensor(s);
     std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
