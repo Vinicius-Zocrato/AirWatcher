@@ -1,5 +1,5 @@
-#ifndef SENSOR_H   // Nome da macro de guarda deve ser único e não depender do nome do arquivo
-#define SENSOR_H   // Definir a macro para indicar que o arquivo foi incluído
+#ifndef SENSOR_H   
+#define SENSOR_H  
 
 #include <vector>
 #include <string>
@@ -13,7 +13,7 @@ private:
     float latitude;
     float longitude;
     bool status;
-    vector<Measurement> Measurements;
+    vector<Measurement> measurements;
 
 public:
     Sensor();
@@ -21,6 +21,20 @@ public:
     Sensor(string sensorID, float lat, float lon, bool status);
 
     ~Sensor();
+
+    void addMeasurement(Measurement measurement);
+
+    vector<Measurement> getMeasurements();
+
+    vector<Measurement> getMeasurementPeriod(string init, string final); //not implemented yet
+
+    void setStatus();
+
+    float getLatitude();
+
+    float getLongitude();
+
+    float getStatus();
 };
 
 #endif
