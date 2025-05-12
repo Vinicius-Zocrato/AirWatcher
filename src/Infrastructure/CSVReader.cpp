@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 CSVReader::CSVReader()
 {
@@ -28,7 +29,7 @@ vector<Sensor> CSVReader::loadSensors(const string &filename) const
     string line;
 
     vector<Sensor> sensors;
-    vector<User> userIDs = loadUsers("users.csv");
+    vector<User> users = loadUsers("users.csv");
 
     while (getline(file, line))
     {
@@ -42,12 +43,15 @@ vector<Sensor> CSVReader::loadSensors(const string &filename) const
         ss.ignore(1);
         ss >> longitude;
 
-        for (const auto &user : userIDs)
+        for (const auto &user : users)
         {
-            if (user.getUserId() == sensorID)
+            for (const auto &sensor : user.getAssociatedSensors())
             {
-                userID = user.getUserId();
-                break;
+                if (sensor.getId() == sensorID)
+                {
+                    userID = user.getUserId();
+                    break;
+                }
             }
         }
 
@@ -102,6 +106,7 @@ vector<User> CSVReader::loadUsers(const string &filename) const
     // It is set to 0 by default in the constructor of the User class
     // The attribute "isReliable" is not included in the CSV file
     // It is set to true by default in the constructor of the User class
+    map<string, vector<Sensor>> userSensorsMap;
 
     ifstream file(filename);
     if (!file.is_open())
@@ -118,10 +123,13 @@ vector<User> CSVReader::loadUsers(const string &filename) const
 
         getline(ss, userId, ';');
         getline(ss, sensorID, ';');
-
         User user;
         user.setUserId(userId);
+        user.setScore(0);
+        user.setIsReliable(true);
+        userSensorsMap[userId].push_back(Sensor(sensorID, 0, 0, true, userId));
 
+        user.setAssociatedSensors(userSensorsMap[userId]);
         users.push_back(user);
     }
     return users;
