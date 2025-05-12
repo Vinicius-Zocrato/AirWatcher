@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -20,8 +21,8 @@ private:
     string CleanerId;
     float Latitude;
     float Longitude;
-    string TimeStampStart;
-    string TimeStampStop;
+    tm TimeStampStart;
+    tm TimeStampStop;
 };
 
 #endif // Cleaner_H
