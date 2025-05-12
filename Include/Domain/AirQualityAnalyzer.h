@@ -1,12 +1,12 @@
-#ifndef AIRQUALITYANALIZER 
-#define AIRQUALITYANALIZER  
+#ifndef AIRQUALITYANALYZER 
+#define AIRQUALITYANALYZER  
 
 #include<vector>
 #include"Sensor.h"
 
 using namespace std;
 
-class AirQualityAnalizer
+class AirQualityAnalyzer
 {
 private:
     
