@@ -17,7 +17,7 @@ Cleaner::Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStamp
 Cleaner::~Cleaner() {
 }
 
-bool Cleaner::isActiveAt() {
+bool Cleaner::isActiveAt(time_t time) {
 
     return true; 
 }

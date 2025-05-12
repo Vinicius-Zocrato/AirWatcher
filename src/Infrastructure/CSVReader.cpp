@@ -97,7 +97,33 @@ vector<Measurement> CSVReader::loadMeasurements(const string &filename) const
 vector<User> CSVReader::loadUsers(const string &filename) const
 {
     vector<User> users;
-    // Load users from CSV file
+    // THE CSV FILE FORMAT: userID, sensorID
+    // The attribute "score" is not included in the CSV file
+    // It is set to 0 by default in the constructor of the User class
+    // The attribute "isReliable" is not included in the CSV file
+    // It is set to true by default in the constructor of the User class
+
+    ifstream file(filename);
+    if (!file.is_open())
+    {
+        cerr << "Could not open the file!" << endl;
+        return {};
+    }
+    string line;
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string userId;
+        string sensorID;
+
+        getline(ss, userId, ';');
+        getline(ss, sensorID, ';');
+
+        User user;
+        user.setUserId(userId);
+
+        users.push_back(user);
+    }
     return users;
 }
 
@@ -113,4 +139,76 @@ vector<Cleaner> CSVReader::loadCleaners(const string &filename) const
     vector<Cleaner> cleaners;
     // Load cleaners from CSV file
     return cleaners;
+}
+
+std::vector<Attribute> CSVReader::loadAttributes() {
+
+    std::ifstream file(this->filename);
+    if (!file) {
+        std::cerr << "Error, open File\n";
+        return {};
+    }
+
+    std::vector<std::string> AttributeID;
+    std::vector<std::string> Unit;
+    std::vector<std::string> Description;
+
+    std::string linha;
+    while (std::getline(file, linha)) {
+        if (linha.empty()) continue;  
+
+        std::stringstream ss(linha);
+        std::string s1, s2, s3;
+
+        
+        if (!std::getline(ss, s1, ';')) continue;
+        
+        if (!std::getline(ss, s2, ';')) continue;
+        
+        if (!std::getline(ss, s3, ';')) continue;
+
+        
+        try {
+            // armazena
+            AttributeID.push_back(s1);
+            Unit.push_back(s2);
+            Description.push_back(s3);
+        } catch (const std::exception& e) {
+            std::cerr << "Erro convert values: " << linha << "\n";
+        }
+    }
+
+    std::vector<Attribute> attributes;
+
+    for(int i=0; i<AttributeID.size(); i++){
+        attributes.push_back(Attribute(AttributeID[i], Unit[i], Description[i]));
+    }
+
+    this->attributes = attributes;
+
+    return attributes;
+}
+
+const std::vector<Sensor>& CSVReader::getSensors()  {
+    return sensors;
+}
+
+const std::vector<Measurement>& CSVReader::getMeasurements()  {
+    return measurements;
+}
+
+const std::vector<User>& CSVReader::getUsers()  {
+    return users;
+}
+
+const std::vector<Provider>& CSVReader::getProviders()  {
+    return providers;
+}
+
+const std::vector<Cleaner>& CSVReader::getCleaners()  {
+    return cleaners;
+}
+
+const std::vector<Attribute>& CSVReader::getAttributes()  {
+    return attributes;
 }
