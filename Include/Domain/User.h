@@ -8,14 +8,16 @@ using namespace std;
 
 class Sensor; // Déclaration anticipée de la classe Sensor si elle est définie ailleurs
 
-class User {
+class User
+{
 public:
     User();
+    User(string userId, vector<Sensor> associatedSensors);
     ~User();
     vector<Sensor> getAssociatedSensors() const;
     void updateScore();
     void changeRealisable();
-
+    string getUserId() const;
 
 private:
     string userId;

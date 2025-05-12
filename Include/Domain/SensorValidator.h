@@ -8,23 +8,18 @@
 using namespace std;
 
 class SensorValidator {
-private:
-    bool isValidSensor;
-    bool isUserReliable;
+private: 
     vector <User> maliciousUsers;
-
 public:
     SensorValidator();
 
     // Getters
-    bool getIsValidSensor() const;
-    bool getIsUserReliable() const;
-    std::vector<User> getMaliciousUsers() const;
+    vector<User> getMaliciousUsers() const;
 
     // Méthodes principales
     bool isValidSensor(const Sensor& sensor);
     bool isUserReliable(const User& user);
-   vector<User> detectMaliciousUsers(const vector<User>& users);
+    vector<User> detectMaliciousUsers(const vector<User>& users);
 };
 
 #endif // SENSORVALIDATOR_H
