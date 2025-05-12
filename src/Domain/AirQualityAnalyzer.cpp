@@ -8,7 +8,7 @@ double AirQualityAnalyzer::calculateAirQuality() {
 
 AirQualityAnalyzer::AirQualityAnalyzer()
 {
-    
+
 }
 
 double AirQualityAnalyzer::calculateSimilarity() {
@@ -33,5 +33,11 @@ std::vector<Sensor> AirQualityAnalyzer::rankSensorByQuality() {
 
 Sensor AirQualityAnalyzer::findSensorById(string const capteurId) const
 {
-
+    for( int i = 0 ; i < sensors.size(); i++)
+    {
+        if (sensors[i].getId() ==  capteurId) 
+        {
+            return sensors[i];
+        }
+    }
 }
