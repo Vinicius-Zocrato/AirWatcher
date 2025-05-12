@@ -44,7 +44,9 @@ bool Test4()
 }
 bool Test5()
 {
-    Cleaner cleaner("C1", 45, 5, "2025-01-01 00:00:00", "2025-01-10 00:00:00");
+    tm startTime = tm{0, 0, 0, 1, 0, 2025 - 1900};
+    tm endTime = tm{0, 0, 0, 10, 0, 2025 - 1900};
+    Cleaner cleaner = Cleaner("C1", 45.0, 5.0, startTime, endTime);
 
     // Create a tm structure for the test time
     tm testTime = {};
