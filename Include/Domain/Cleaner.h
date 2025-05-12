@@ -11,6 +11,7 @@ using namespace std;
 class Cleaner {
 public:
     Cleaner();
+    Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStampStart, tm TimeStampStop);
     ~Cleaner();
     bool isActiveAt();
     double estimatedImpact();

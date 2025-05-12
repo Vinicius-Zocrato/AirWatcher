@@ -2,9 +2,16 @@
 #include "../../Include/Domain/Sensor.h"
 
 
-Cleaner::Cleaner()
-    : CleanerId(""), Latitude(0.0f), Longitude(0.0f), TimeStampStart(""), TimeStampStop("") {
+Cleaner::Cleaner() {
     
+}
+
+Cleaner::Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStampStart, tm TimeStampStop){
+    this->CleanerId = CleanerId;
+    this->Latitude = Latitude;
+    this->Longitude = Longitude;
+    this->TimeStampStart = TimeStampStart;
+    this->TimeStampStop = TimeStampStop;
 }
 
 Cleaner::~Cleaner() {
