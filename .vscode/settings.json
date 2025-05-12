@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.h": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
         "cctype": "cpp",
@@ -43,6 +44,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp"
     }
 }
