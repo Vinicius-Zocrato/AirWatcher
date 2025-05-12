@@ -7,18 +7,15 @@ User::User()
     
 }
 
-// Destructeur
 User::~User() {
 }
 
-// Renvoie la liste des capteurs associés
 vector<Sensor> User::getAssociatedSensors() const {
     return associatedSensors;
 }
 
 
 void User::updateScore() {
-    // Exemple : augmenter le score de 1
     score += 1;
 }
 
