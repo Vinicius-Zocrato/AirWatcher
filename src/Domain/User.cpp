@@ -27,6 +27,21 @@ bool User::getIsReliable() const {
     return isReliable;
 }
 
-bool User::getIsReliable() const {
-    return isReliable;
+int User::getScore() const{
+    return score;
+}
+
+string User::getUserId()const{
+    return userId;
+}
+
+void User::toString() const {
+    std::cout << "User ID: " << userId
+              << ", Score: " << score
+              << ", IsReliable: " << (isReliable ? "true" : "false")
+              << std::endl;
+    std::cout << "Associated Sensors (" << associatedSensors.size() << "):" << std::endl;
+    for (const auto& sensor : associatedSensors) {
+        sensor.toString();
+    }
 }

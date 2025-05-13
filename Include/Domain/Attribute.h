@@ -13,9 +13,10 @@ public:
     Attribute(string attributeID, string unit, string description);
     Attribute();
     ~Attribute();
-    void setAttributeID(const string &attributeID) { this->attributeID = attributeID; }
-    void setUnit(const string &unit) { this->unit = unit; }
-    void setDescription(const string &description) { this->description = description; }
+    string getAttibruteID() const;
+    string getUnit() const;
+    string getDescription() const;
+    void toString() const;
 
 private:
     string attributeID;

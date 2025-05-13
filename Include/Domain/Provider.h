@@ -13,20 +13,17 @@ private:
     vector <Cleaner> cleaners;
 
 public:
-    // Constructeurs
-    Provider() = default;
+    
+    Provider();
     Provider(const string& id, const vector<Cleaner>& cleanersList);
+    Provider(const string& id);
 
-    // Getters
     string getProviderId() const;
     vector<Cleaner> getAirCleaners() const;
+    void toString() const;
 
-    // Setters
-    void setProviderId(const string& id);
-    void setCleaners(const vector<Cleaner>& cleanersList);
-
-    // Méthode pour ajouter un cleaner
     void addCleaner(const Cleaner& cleaner);
+
 };
 
 #endif // PROVIDER_H

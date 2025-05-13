@@ -15,12 +15,14 @@ public:
     CSVReader();
     ~CSVReader();
 
+    void loadData();
     vector<Sensor> loadSensors(const string &filename) const;
     vector<Measurement> loadMeasurements(const string &filename) const;
     vector<User> loadUsers(const string &filename) const;
     vector<Provider> loadProviders(const string &filename) const;
     vector<Cleaner> loadCleaners(const string &filename) const;
     map<string, Sensor> loadSensorMap(const string &filename) const;
+    vector<Attribute> loadAttributes(const string &filename) const;
 
     const std::vector<Sensor>&      getSensors() ;
     const std::vector<Measurement>& getMeasurements() ;

@@ -2,9 +2,7 @@
 #include <iostream>
 
 Attribute::Attribute() {
-    this->attributeID = "";
-    this->unit = "";
-    this->description = "";
+
 }
 
 Attribute::Attribute(string attributeID, string unit, string description){
@@ -14,6 +12,19 @@ Attribute::Attribute(string attributeID, string unit, string description){
 }
 
 Attribute::~Attribute() {
+}
+
+
+string Attribute::getUnit() const{
+    return this->unit;
+}
+
+string Attribute::getDescription() const{
+    return this->description;
+
+}
+string Attribute::getAttibruteID() const{
+    return this->attributeID;
 }
 
 void Attribute::toString() const {
