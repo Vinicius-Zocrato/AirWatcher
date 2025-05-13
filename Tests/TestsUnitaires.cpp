@@ -1,8 +1,8 @@
 #include "../Include/Domain/Measurement.h"
 #include "../Include/Domain/Attribute.h"
 #include "../Include/Domain/Sensor.h"
-#include "../Include/Domain/SensorValidator.h"
-#include "../Include/Domain/AirQualityAnalyzer.h"
+//#include "../Include/Domain/SensorValidator.h"
+//#include "../Include/Domain/AirQualityAnalyzer.h"
 #include "../Include/Domain/User.h"
 #include "../Include/Presentation/ConsoleUI.h"
 #include "../Include/Infrastructure/CSVReader.h"
@@ -176,21 +176,38 @@ bool Test20() {
 }*/
 
 bool test21(){
-    CSVReader reader("attributes.csv");
-
-    reader.loadAttributes();
+    cout<<"Runing Tests 21\n";
+    CSVReader reader;
+    reader.loadData();
 
     for (size_t i = 0; i < reader.getAttributes().size(); i++)
     {
         reader.getAttributes()[i].toString();
     }
 
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test22(){
+    cout<<"Runing Tests 22\n";
+    CSVReader reader;
+    reader.loadData();
+
+    for (size_t i = 0; i < reader.getCleaners().size(); i++)
+    {
+        reader.getCleaners()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
     return true;
 }
 
 int main() {
     //Test1(); Test2(); Test3(); Test4(); Test5(); 
-    test21();
+    test21(); test22();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
