@@ -27,61 +27,78 @@ void CSVReader::loadData(){
     loadCleaners("../Data/cleaners.csv");
     loadMeasurements("../Data/measurements.csv");
     loadProviders("../Data/providers.csv");
+    loadSensors("../Data/sensors.csv");
+    loadUsers("../Data/users.csv");
 }
 
 
-/*
-vector<Sensor> CSVReader::loadSensors(const string &filename) const
+
+vector<Sensor> CSVReader::loadSensors(const string &filename) 
 {
-    // CSV FILE FORMAT: sensorID, latitude, longitude
-    // The attribute "status" is not included in the CSV file
-    // It is set to true by default in the constructor of the Sensor class
-
-    // We need to get the userID for each sensor
-
-    ifstream file(filename);
-    if (!file.is_open())
+    if(this->measurements.empty()){
+        loadMeasurements("../Data/measurements.csv");
+    }
+    
+    std::ifstream file(filename);
+    if (!file)
     {
-        cerr << "Could not open the file!" << endl;
+        std::cerr << "Error, open File\n";
         return {};
     }
 
-    string line;
+    std::vector<std::string> SensorID;
+    std::vector<float> latitude;
+    std::vector<float> longitude;
 
-    vector<Sensor> sensors;
-    vector<User> users = loadUsers("users.csv");
 
-    while (getline(file, line))
+    std::string linha;
+    while (std::getline(file, linha))
     {
-        stringstream ss(line);
-        string sensorID;
-        double latitude, longitude;
-        string userID = "Government";
+        if (linha.empty())
+            continue;
 
-        getline(ss, sensorID, ';');
-        ss >> latitude;
-        ss.ignore(1);
-        ss >> longitude;
+        std::stringstream ss(linha);
+        std::string s1, s2, s3;
 
-        for (const auto &user : users)
+        if (!std::getline(ss, s1, ';'))
+            continue;
+
+        if (!std::getline(ss, s2, ';'))
+            continue;
+
+        if (!std::getline(ss, s3, ';'))
+            continue;
+
+        try
         {
-            for (const auto &sensor : user.getAssociatedSensors())
-            {
-                if (sensor.getId() == sensorID)
-                {
-                    userID = user.getUserId();
-                    break;
-                }
-            }
+            SensorID.push_back(s1);
+            float v1 = std::stod(s2);
+            float v2 = std::stod(s3);
+            latitude.push_back(v1);
+            longitude.push_back(v2);
         }
-
-        Sensor sensor(sensorID, latitude, longitude, true, userID);
-        sensors.push_back(sensor);
+        catch (const std::exception &e)
+        {
+            std::cerr << "Erro convert values: " << linha << "\n";
+        }
     }
 
+    for (int i = 0; i < SensorID.size(); i++)
+    {   
+        this->sensors.push_back(Sensor(SensorID[i], latitude[i], longitude[i], ""));
+    }
+
+    for (int i=0; i<measurements.size(); i++){
+        for(int j=0; j<sensors.size(); j++){
+            if(measurements[i].getSensorID ()== sensors[j].getId()){
+                sensors[j].addMeasurement(measurements[i]);
+            }
+        }
+    }
+    
     return sensors;
 }
-*/
+
 vector<Measurement> CSVReader::loadMeasurements(const string &filename) 
 {   
     if(this->attributes.empty()){
@@ -155,45 +172,65 @@ vector<Measurement> CSVReader::loadMeasurements(const string &filename)
 
     return measurements;
 }
-/*
-vector<User> CSVReader::loadUsers(const string &filename) const
-{
-    vector<User> users;
-    // THE CSV FILE FORMAT: userID, sensorID
-    // The attribute "score" is not included in the CSV file
-    // It is set to 0 by default in the constructor of the User class
-    // The attribute "isReliable" is not included in the CSV file
-    // It is set to true by default in the constructor of the User class
-    map<string, vector<Sensor>> userSensorsMap;
 
-    ifstream file(filename);
-    if (!file.is_open())
+vector<User> CSVReader::loadUsers(const string &filename) 
+{
+    if(this->sensors.empty()){
+        loadSensors("../Data/sensors.csv");
+    }
+
+    std::ifstream file(filename);
+    if (!file)
     {
-        cerr << "Could not open the file!" << endl;
+        std::cerr << "Error, open File\n";
         return {};
     }
-    string line;
-    while (getline(file, line))
+
+    std::vector<std::string> UserID;
+    std::vector<std::string> SensorID;
+
+    std::string linha;
+    while (std::getline(file, linha))
     {
-        stringstream ss(line);
-        string userId;
-        string sensorID;
+        if (linha.empty())
+            continue;
 
-        getline(ss, userId, ';');
-        getline(ss, sensorID, ';');
-        User user;
-        user.setUserId(userId);
-        user.setScore(0);
-        user.setIsReliable(true);
-        userSensorsMap[userId].push_back(Sensor(sensorID, 0, 0, true, userId));
+        std::stringstream ss(linha);
+        std::string s1, s2;
 
-        user.setAssociatedSensors(userSensorsMap[userId]);
-        users.push_back(user);
+        if (!std::getline(ss, s1, ';'))
+            continue;
+
+        if (!std::getline(ss, s2, ';'))
+            continue;
+
+        try
+        {
+            UserID.push_back(s1);
+            SensorID.push_back(s2);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Erro convert values: " << linha << "\n";
+        }
     }
+
+    for (int i = 0; i < UserID.size(); i++)
+    {   
+        this->users.push_back(User(UserID[i]));
+        for (int j = 0; j < sensors.size(); j++)
+        {      
+            if(SensorID[i] == sensors[j].getId()){
+                this->sensors[j].setUserID(UserID[i]);
+                this->users[i].inserAssociatedSensor(sensors[j]);
+            }
+        }
+    }
+    
     return users;
 }
 
-*/
+
 
 vector<Provider> CSVReader::loadProviders(const string &filename) 
 {   
@@ -219,7 +256,7 @@ vector<Provider> CSVReader::loadProviders(const string &filename)
             continue;
 
         std::stringstream ss(linha);
-        std::string s1, s2, s3;
+        std::string s1, s2;
 
         if (!std::getline(ss, s1, ';'))
             continue;

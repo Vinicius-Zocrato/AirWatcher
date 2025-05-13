@@ -235,12 +235,63 @@ bool test24(){
     return true;
 }
 
+bool test25(){
+    cout<<"Runing Tests 25\n";
+    CSVReader reader;
+    reader.loadSensors("../Data/sensors.csv");
+
+    for (size_t i = 0; i < 1; i++)
+    {
+        reader.getSensors()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test26(){
+    cout<<"Runing Tests 26\n";
+    CSVReader reader;
+    reader.loadUsers("../Data/users.csv");
+
+    for (size_t i = 0; i < reader.getUsers().size(); i++)
+    {
+        reader.getUsers()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test27(){
+    cout<<"Runing Tests 26\n";
+    CSVReader reader;
+    reader.loadData();
+
+    reader.getAttributes()[0].toString();
+    reader.getCleaners()[0].toString();
+    reader.getMeasurements()[0].toString();
+    reader.getProviders()[0].toString();
+    reader.getSensors()[0].toString();
+    reader.getUsers()[0].toString();
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+
 
 
 int main() {
     //Test1(); Test2(); Test3(); Test4(); Test5(); 
-    test21(); test22(); //test23();
-    test24();
+    //test21(); //test22(); //test23();
+    //test24();
+    //test25();
+    //test26();
+    test27();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();

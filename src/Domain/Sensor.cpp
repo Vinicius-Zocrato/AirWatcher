@@ -24,10 +24,26 @@ void Sensor::setStatus(){
     this->status = !this->status;
 }
 
+void Sensor::setUserID(string userID){
+    this->userID = userID;
+}
+
+void Sensor::addMeasurement(Measurement measurement){
+    measurements.push_back(measurement);
+}
+
 vector<Measurement> Sensor::getMeasurementPeriod(tm init, tm final){ //not implemented yet
 
     
     return {};
+}
+
+string Sensor::getId() const{
+    return this->sensorID;
+}
+
+string Sensor::getUserId() const{
+    return this->userID;
 }
 
 

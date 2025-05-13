@@ -36,6 +36,8 @@ public:
 
     void setStatus();
 
+    void setUserID(string userID);
+
     string getId() const;
 
     float getLatitude() const;
