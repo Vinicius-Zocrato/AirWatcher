@@ -13,11 +13,17 @@ public:
     User();
     User(string userId, vector<Sensor> associatedSensors);
     ~User();
-    vector<Sensor> getAssociatedSensors() const;
+
     void updateScore();
     void changeRealisable();
+    
     bool getIsReliable() const;
-    bool getIsReliable() const;
+    string getUserId() const;
+    int getScore() const;
+    vector<Sensor> getAssociatedSensors() const;
+
+    void toString() const;
+
 
 
 private:

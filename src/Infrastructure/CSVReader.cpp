@@ -12,7 +12,7 @@ CSVReader::CSVReader()
     cout << "CSVReader constructor called" << endl;
 #endif
 }
-
+/*
 vector<Sensor> CSVReader::loadSensors(const string &filename) const
 {
     // CSV FILE FORMAT: sensorID, latitude, longitude
@@ -137,10 +137,48 @@ vector<User> CSVReader::loadUsers(const string &filename) const
     return users;
 }
 
+*/
+
 vector<Provider> CSVReader::loadProviders(const string &filename) const
 {
-    vector<Provider> providers;
-    // Load providers from CSV file
+    std::ifstream file(filename);
+    if (!file)
+    {
+        std::cerr << "Error, open File\n";
+        return {};
+    }
+
+    std::vector<std::string> ProviderID;
+    std::vector<std::string> CleanerID;
+
+    std::string linha;
+    while (std::getline(file, linha))
+    {
+        if (linha.empty())
+            continue;
+
+        std::stringstream ss(linha);
+        std::string s1, s2, s3;
+
+        if (!std::getline(ss, s1, ';'))
+            continue;
+
+        if (!std::getline(ss, s2, ';'))
+            continue;
+
+        try
+        {
+            ProviderID.push_back(s1);
+            CleanerID.push_back(s2);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Erro convert values: " << linha << "\n";
+        }
+    }
+
+    std::vector<Provider> providers;
+
     return providers;
 }
 
@@ -154,7 +192,7 @@ bool parseDateTime(const std::string &s, std::tm &out_tm)
 std::vector<Cleaner> CSVReader::loadCleaners(const string &filename) const
 {
 
-    std::ifstream file(this->filename);
+    std::ifstream file(filename);
     if (!file)
     {
         std::cerr << "Error, open File\n";
@@ -229,17 +267,13 @@ std::vector<Cleaner> CSVReader::loadCleaners(const string &filename) const
         cleaners.push_back(Cleaner(cleanerID[i], latitude[i], longitude[i], timeStampStart[i], timeStampStop[i]));
     }
 
-    return {};
-
-    this->cleaners = cleaners;
-
     return cleaners;
 }
 
-std::vector<Attribute> CSVReader::loadAttributes()
+std::vector<Attribute> CSVReader::loadAttributes (const string &filename) const
 {
 
-    std::ifstream file(this->filename);
+    std::ifstream file(filename);
     if (!file)
     {
         std::cerr << "Error, open File\n";
@@ -287,8 +321,6 @@ std::vector<Attribute> CSVReader::loadAttributes()
     {
         attributes.push_back(Attribute(AttributeID[i], Unit[i], Description[i]));
     }
-
-    this->attributes = attributes;
 
     return attributes;
 }

@@ -59,6 +59,11 @@
         "string_view": "cpp",
         "fstream": "cpp",
         "numbers": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "iomanip": "cpp",
+        "map": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp",
+        "xtree": "cpp"
     }
 }

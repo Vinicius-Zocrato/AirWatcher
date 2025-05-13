@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 
 #include "Measurement.h"
 using namespace std;
@@ -23,25 +24,29 @@ private:
 public:
     Sensor();
 
-    Sensor(string sensorID, float lat, float lon, bool status, string userID);
+    Sensor(string sensorID, float lat, float lon, string userID);
 
     ~Sensor();
 
     void addMeasurement(Measurement measurement);
 
-    vector<Measurement> getMeasurements() const;
+    vector<Measurement> getMeasurements();
 
-    vector<Measurement> getMeasurementPeriod(string init, string final); // not implemented yet
-
+    vector<Measurement> getMeasurementPeriod(tm init, tm final); // not implemented yet
 
     void setStatus();
+
     string getId() const;
 
-    float getLatitude();
+    float getLatitude() const;
 
-    float getLongitude();
+    float getLongitude() const;
 
-    bool getStatus() const ;
+    string getUserId() const;
+
+    bool getStatus() const;
+
+    void toString() const;
 };
 
 #endif
