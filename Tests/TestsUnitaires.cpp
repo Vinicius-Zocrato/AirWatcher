@@ -178,7 +178,7 @@ bool Test20() {
 bool test21(){
     cout<<"Runing Tests 21\n";
     CSVReader reader;
-    reader.loadData();
+    reader.loadAttributes("../Data/attributes.csv");
 
     for (size_t i = 0; i < reader.getAttributes().size(); i++)
     {
@@ -193,7 +193,7 @@ bool test21(){
 bool test22(){
     cout<<"Runing Tests 22\n";
     CSVReader reader;
-    reader.loadData();
+    reader.loadCleaners("../Data/cleaners.csv");
 
     for (size_t i = 0; i < reader.getCleaners().size(); i++)
     {
@@ -205,9 +205,42 @@ bool test22(){
     return true;
 }
 
+bool test23(){
+    cout<<"Runing Tests 23\n";
+    CSVReader reader;
+    reader.loadMeasurements("../Data/measurements.csv");
+
+    for (size_t i = 0; i < reader.getMeasurements().size(); i++)
+    {
+        reader.getMeasurements()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test24(){
+    cout<<"Runing Tests 24\n";
+    CSVReader reader;
+    reader.loadProviders("../Data/providers.csv");
+
+    for (size_t i = 0; i < reader.getProviders().size(); i++)
+    {
+        reader.getProviders()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+
+
 int main() {
     //Test1(); Test2(); Test3(); Test4(); Test5(); 
-    test21(); test22();
+    test21(); test22(); //test23();
+    test24();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
