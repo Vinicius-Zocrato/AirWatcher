@@ -8,20 +8,19 @@ using namespace std;
 
 class Measurement {
     public:
-        Measurement(const tm& timestamp, const Attribute& attribute, float value)
-            : timestamp(timestamp), attribute(attribute), value(value) {}
-        Measurement(const Measurement& other)
-            : timestamp(other.timestamp), attribute(other.attribute), value(other.value) {}
+        Measurement(tm timestamp, Attribute attribute, float value, string sensorID);
         Measurement();
         ~Measurement();
         tm getTimeStamp()const;
         Attribute getAttribute()const;
         float getValue()const;
+        string getSensorID()const;
         void toString()const;
 
     private:
         tm timestamp;
         Attribute attribute;
         float value;
+        string sensorID;
 };
 #endif // MEASUREMENT_H

@@ -15,9 +15,18 @@ CSVReader::~CSVReader(){
 
 }
 
+bool parseDateTime(const std::string &s, std::tm &out_tm)
+{
+    std::istringstream ss(s);
+    ss >> std::get_time(&out_tm, "%Y-%m-%d %H:%M:%S");
+    return !ss.fail();
+}
+
 void CSVReader::loadData(){
-    this->attributes = loadAttributes("../Data/attributes.csv");
-    this->cleaners = loadCleaners("../Data/cleaners.csv");
+    loadAttributes("../Data/attributes.csv");
+    loadCleaners("../Data/cleaners.csv");
+    loadMeasurements("../Data/measurements.csv");
+    loadProviders("../Data/providers.csv");
 }
 
 
@@ -72,43 +81,81 @@ vector<Sensor> CSVReader::loadSensors(const string &filename) const
 
     return sensors;
 }
+*/
+vector<Measurement> CSVReader::loadMeasurements(const string &filename) 
+{   
+    if(this->attributes.empty()){
+        loadAttributes("../Data/attributes.csv");
+    }
 
-vector<Measurement> CSVReader::loadMeasurements(const string &filename) const
-{
-    // CSV FILE FORMAT: timestamp, sensorID, attribute, value
-    vector<Measurement> measurements;
-    // Load measurements from CSV file
-    ifstream file(filename);
-    if (!file.is_open())
+    std::ifstream file(filename);
+    if (!file)
     {
-        cerr << "Could not open the file!" << endl;
+        std::cerr << "Error, open File\n";
         return {};
     }
 
-    string line;
-    while (getline(file, line))
+    std::vector<std::string> attribute;
+    std::vector<std::string> sensorID;
+    std::vector<float> value;
+    std::vector<std::tm> timestamp;
+
+    std::tm tm_time = {};
+
+    std::string linha;
+    while (std::getline(file, linha))
     {
-        stringstream ss(line);
-        string timestamp;
-        double value;
-        Attribute attribute;
-        string sensorID;
+        if (linha.empty())
+            continue;
 
-        getline(ss, timestamp, ';');
-        ss >> sensorID;
-        ss.ignore(1);
-        ss >> attribute;
-        ss.ignore(1);
-        ss >> value;
-        ss.ignore(1);
+        std::stringstream ss(linha);
+        std::string s1, s2, s3, s4;
 
-        Measurement measurement(timestamp, attribute, value, sensorID);
-        measurements.push_back(measurement);
+        if (!std::getline(ss, s1, ';'))
+            continue;
+
+        if (!std::getline(ss, s2, ';'))
+            continue;
+
+        if (!std::getline(ss, s3, ';'))
+            continue;
+
+        if (!std::getline(ss, s4, ';'))
+            continue;
+
+        try
+        {   
+            if (!parseDateTime(s1, tm_time))
+            {
+                std::cerr << "Date invalid format at: " << linha << "\n";
+                continue;
+            }
+            timestamp.push_back(tm_time);
+            sensorID.push_back(s2);
+            attribute.push_back(s3);
+            float v1 = std::stod(s4);
+            value.push_back(v1);
+            
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Erro convert values: " << linha << "\n";
+        }
+    }
+
+    for (int i = 0; i < value.size(); i++)
+    {   
+        for (int j = 0; j < attributes.size(); j++)
+        {   
+            if(attribute[i] == attributes[j].getAttibruteID()){
+                this->measurements.push_back(Measurement(timestamp[i], this->attributes[j], value[i], sensorID[i]));
+            }
+        }
     }
 
     return measurements;
 }
-
+/*
 vector<User> CSVReader::loadUsers(const string &filename) const
 {
     vector<User> users;
@@ -148,8 +195,13 @@ vector<User> CSVReader::loadUsers(const string &filename) const
 
 */
 
-vector<Provider> CSVReader::loadProviders(const string &filename) const
-{
+vector<Provider> CSVReader::loadProviders(const string &filename) 
+{   
+
+    if(this->cleaners.empty()){
+        loadCleaners("../Data/cleaners.csv");
+    }
+
     std::ifstream file(filename);
     if (!file)
     {
@@ -186,19 +238,21 @@ vector<Provider> CSVReader::loadProviders(const string &filename) const
         }
     }
 
-    std::vector<Provider> providers;
-
+    for (int i = 0; i < ProviderID.size(); i++)
+    {   
+        this->providers.push_back(Provider(ProviderID[i]));
+        for (int j = 0; j < cleaners.size(); j++)
+        {      
+            if(CleanerID[i] == cleaners[j].getCleanerID()){
+                this->providers[i].addCleaner(cleaners[j]);
+            }
+        }
+    }
+    
     return providers;
 }
 
-bool parseDateTime(const std::string &s, std::tm &out_tm)
-{
-    std::istringstream ss(s);
-    ss >> std::get_time(&out_tm, "%Y-%m-%d %H:%M:%S");
-    return !ss.fail();
-}
-
-std::vector<Cleaner> CSVReader::loadCleaners(const string &filename) const
+std::vector<Cleaner> CSVReader::loadCleaners(const string &filename) 
 {
 
     std::ifstream file(filename);
@@ -269,17 +323,15 @@ std::vector<Cleaner> CSVReader::loadCleaners(const string &filename) const
         }
     }
 
-    std::vector<Cleaner> cleaners;
-
     for (size_t i = 0; i < cleanerID.size(); i++)
     {
-        cleaners.push_back(Cleaner(cleanerID[i], latitude[i], longitude[i], timeStampStart[i], timeStampStop[i]));
+        this->cleaners.push_back(Cleaner(cleanerID[i], latitude[i], longitude[i], timeStampStart[i], timeStampStop[i]));
     }
 
     return cleaners;
 }
 
-std::vector<Attribute> CSVReader::loadAttributes (const string &filename) const
+std::vector<Attribute> CSVReader::loadAttributes (const string &filename) 
 {
 
     std::ifstream file(filename);
@@ -324,11 +376,10 @@ std::vector<Attribute> CSVReader::loadAttributes (const string &filename) const
         }
     }
 
-    std::vector<Attribute> attributes;
 
-    for (int i = 0; i < AttributeID.size(); i++)
+    for (size_t i = 0; i < AttributeID.size(); i++)
     {
-        attributes.push_back(Attribute(AttributeID[i], Unit[i], Description[i]));
+        this->attributes.push_back(Attribute(AttributeID[i], Unit[i], Description[i]));
     }
 
     return attributes;
