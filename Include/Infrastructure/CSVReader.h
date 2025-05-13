@@ -21,7 +21,7 @@ public:
     vector<User> loadUsers(const string &filename) const;
     vector<Provider> loadProviders(const string &filename) const;
     vector<Cleaner> loadCleaners(const string &filename) const;
-    map<string, Sensor> loadSensorMap(const string &filename) const;
+    //map<string, Sensor> loadSensorMap(const string &filename) const;
     vector<Attribute> loadAttributes(const string &filename) const;
 
     const std::vector<Sensor>&      getSensors() ;

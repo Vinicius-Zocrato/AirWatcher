@@ -8,10 +8,19 @@
 
 CSVReader::CSVReader()
 {
-#ifdef MAP
     cout << "CSVReader constructor called" << endl;
-#endif
 }
+
+CSVReader::~CSVReader(){
+
+}
+
+void CSVReader::loadData(){
+    this->attributes = loadAttributes("../Data/attributes.csv");
+    this->cleaners = loadCleaners("../Data/cleaners.csv");
+}
+
+
 /*
 vector<Sensor> CSVReader::loadSensors(const string &filename) const
 {
