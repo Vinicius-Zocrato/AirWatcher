@@ -1,6 +1,9 @@
 #include "SensorValidator.h"
 #include <cmath>
 #include <iostream>
+#include <algorithm>
+#include <numeric>
+#include <optional>
 #include "User.h"
 #include "Sensor.h"
 #include "Measurement.h"
