@@ -71,7 +71,7 @@ static float ecartType(const vector<float>& v) {
 
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor( Sensor& sensor)  {
+bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
@@ -100,7 +100,11 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
 
     if (ValeurVoisines.size() < 2) return true; // Non déterminable, on considère valide car peut pas montrer le contraire
     // Calcul de la moyenne des valeurs voisines
-
+    float moyenneVoisins = mean(ValeurVoisines);
+    float ecartTypeVoisins = ecartType(ValeurVoisines);
+    float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
+    float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
+    bool suspectSpatial = (valeur < borneBasse || valeur > borneHaute);
 
     return sensor.getStatus();
 
