@@ -13,7 +13,7 @@ public:
     Attribute(string attributeID, string unit, string description);
     Attribute();
     ~Attribute();
-    string getAttibruteID() const;
+    string getAttributeID() const;
     string getUnit() const;
     string getDescription() const;
     void toString() const;

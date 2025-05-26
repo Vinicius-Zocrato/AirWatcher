@@ -23,7 +23,7 @@ string Attribute::getDescription() const{
     return this->description;
 
 }
-string Attribute::getAttibruteID() const{
+string Attribute::getAttributeID() const{
     return this->attributeID;
 }
 
