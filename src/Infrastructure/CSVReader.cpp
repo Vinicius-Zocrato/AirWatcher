@@ -164,7 +164,7 @@ vector<Measurement> CSVReader::loadMeasurements(const string &filename)
     {   
         for (int j = 0; j < attributes.size(); j++)
         {   
-            if(attribute[i] == attributes[j].getAttibruteID()){
+            if(attribute[i] == attributes[j].getAttributeID()){
                 this->measurements.push_back(Measurement(timestamp[i], this->attributes[j], value[i], sensorID[i]));
             }
         }

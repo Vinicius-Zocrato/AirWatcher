@@ -39,7 +39,8 @@ vector<Measurement> Sensor::getMeasurementPeriod(tm init, tm final) {
 
     vector<Measurement> result;
     for (const auto& measurement : measurements) {
-        time_t t_measure = mktime(const_cast<tm*>(&measurement.getTimeStamp())); // Attention: getTimeStamp() doit retourner tm
+        std::tm ts = measurement.getTimeStamp();
+        time_t t_measure = std::mktime(&ts);
         if (t_measure >= t_init && t_measure <= t_final) {
             result.push_back(measurement);
         }

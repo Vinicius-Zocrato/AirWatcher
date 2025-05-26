@@ -117,7 +117,7 @@ void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, floa
         {
             Measurement measurement = sensors_in_circle[i].getMeasurements()[j];
             if(inPeriod(init, fin, measurement.getTimeStamp())){
-                if (auto it = std::find(keys.begin(), keys.end(), measurement.getAttribute().getAttibruteID()); it != keys.end()){
+                if (auto it = std::find(keys.begin(), keys.end(), measurement.getAttribute().getAttributeID()); it != keys.end()){
                     switch (distance(keys.begin(), it))
                     {
                     case 0:
@@ -171,11 +171,6 @@ AirQualityAnalyzer::AirQualityAnalyzer()
 
 }
 
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 double AirQualityAnalyzer::calculateSimilarity(const std::vector<Measurement>& m1,
     const std::vector<Measurement>& m2) {
     // TODO
