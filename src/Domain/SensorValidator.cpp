@@ -140,6 +140,18 @@ bool SensorValidator::isUserReliable(const User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
+    //Onn récupère les capteurs associés à l'utilisateur et on vérifie leur validité si false>3 ou 50% alors user non fiable
+    vector<Sensor> sensors = user.getAssociatedSensors();
+    int nbSensorsFalse = 0;
+    for ( int i = 0; i < sensors.size(); i++) {
+        Sensor sensor = sensors[i];
+        bool isValid = isValidSensor(sensor);
+        if (!isValid) {
+            nbSensorsFalse++;
+        }
+    }
+
+
     return user.getIsReliable();
 }
 
