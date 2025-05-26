@@ -32,6 +32,7 @@ std::vector<User> SensorValidator::getMaliciousUsers() const {
     #ifdef MAP 
     cout << "SensorValidator::getMaliciousUsers()" << endl;
     #endif
+    
     return maliciousUsers;
 }
 
