@@ -107,10 +107,11 @@ bool SensorValidator::isValidSensor( Sensor& sensor) { {
 
     //Verification de la dernière valeur par rapport a l'historique 
     vector<float> valeursMesures;
-    for(int i; sensor.getMeasurements().size() ; i++) {
-        float valeur = sensor.addMeasurement()[i].getValue();
-        valeursMesures.push_back(valeur);
-    }
+    vector<Measurement> mesures = sensor.getMeasurements();
+    for (size_t i = 0; i < mesures.size(); ++i) {
+    float valeur = mesures[i].getValue();
+    valeursMesures.push_back(valeur);
+}
     float moyenneHisto = mean(valeursMesures);
     float ecartHisto = ecartType(valeursMesures);
     float borneHistoMin = moyenneHisto - 3 * ecartHisto;
