@@ -71,7 +71,7 @@ static float ecartType(const vector<float>& v) {
 
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor( Sensor& sensor) { {
+bool SensorValidator::isValidSensor( Sensor& sensor) {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
