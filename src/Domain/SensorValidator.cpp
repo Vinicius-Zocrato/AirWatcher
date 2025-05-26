@@ -36,6 +36,20 @@ SensorValidator::SensorValidator() {}
 //     return maliciousUsers;
 // }
 
+
+// Calcule la distance entre deux points pour les capteurs
+static double distance(float lat1, float lon1, float lat2, float lon2) {
+    const double R = 6371.0; // rayon Terre en km
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+    double a = sin(dLat/2)*sin(dLat/2) +
+               cos(lat1*M_PI/180.0)*cos(lat2*M_PI/180.0)*
+               sin(dLon/2)*sin(dLon/2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    return R * c;
+}
+
+
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
 bool SensorValidator::isValidSensor(const Sensor& sensor)  {
     #ifdef MAP 
