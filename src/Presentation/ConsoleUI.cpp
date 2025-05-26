@@ -64,9 +64,53 @@ void handleMaliciousUserDetection() {
 void measureRunTime(string algorithme) {
     std::cout << "Measuring runtime for: " << algorithme << std::endl;
     time_t start = time(nullptr);
-    // Appeler la fonction cible ici si besoin
+    callFunctionByName(algorithme);
     time_t end = time(nullptr);
     std::cout << "Durée d'exécution : " << (end - start) << " secondes." << std::endl;
+}
+
+void callFunctionByName(const std::string& functionName) {
+    if (functionName == "detectMaliciousUsers") {
+        auto users = reader.getUsers();
+        auto mal = validator.detectMaliciousUsers(users);
+        if (mal.empty()) cout << "Aucun utilisateur malveillant détecté.\n";
+        else {
+            cout << "Utilisateurs malveillants :\n";
+            for (const auto& u : mal) u.toString();
+        }
+    }
+    else if (functionName == "calculateAirQuality") {
+        double radius;
+        float latitude, longitude;
+        int y1, m1, d1, h1, min1, s1, y2, m2, d2, h2, min2, s2;
+        cout << "Rayon (km) : "; cin >> radius;
+        cout << "Latitude : "; cin >> latitude;
+        cout << "Longitude : "; cin >> longitude;
+        cout << "Date début (YYYY MM DD HH mm ss) : "; cin >> y1 >> m1 >> d1 >> h1 >> min1 >> s1;
+        cout << "Date fin (YYYY MM DD HH mm ss) : "; cin >> y2 >> m2 >> d2 >> h2 >> min2 >> s2;
+        tm t1 = {}; t1.tm_year = y1-1900; t1.tm_mon = m1-1; t1.tm_mday = d1; t1.tm_hour = h1; t1.tm_min = min1; t1.tm_sec = s1;
+        tm t2 = {}; t2.tm_year = y2-1900; t2.tm_mon = m2-1; t2.tm_mday = d2; t2.tm_hour = h2; t2.tm_min = min2; t2.tm_sec = s2;
+        analyzer.calculateAirQuality(radius, latitude, longitude, t1, t2);
+    }
+    // else if (functionName == "findMostSimilarSensors") {
+    //     string targetId;
+    //     cout << "ID du capteur de référence : "; cin >> targetId;
+    //     auto sensors = reader.getSensors();
+    //     auto it = std::find_if(sensors.begin(), sensors.end(), [&](const Sensor& s){ return s.getId() == targetId; });
+    //     if (it == sensors.end()) {
+    //         cout << "Capteur non trouvé.\n";
+    //         return;
+    //     }
+    //     Sensor target = *it;
+    //     vector<Sensor> others;
+    //     for (const auto& s : sensors) if (s.getId() != targetId) others.push_back(s);
+    //     auto similars = analyzer.findMostSimilarSensors(target, others);
+    //     cout << "Capteurs les plus similaires :\n";
+    //     for (const auto& s : similars) s.toString();
+    // }
+    else {
+        cout << "Fonction inconnue : " << functionName << endl;
+    }
 }
 
 #endif // CONSOLEUI_H
