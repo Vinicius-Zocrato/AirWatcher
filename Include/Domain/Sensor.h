@@ -35,10 +35,10 @@ public:
 
     vector<Measurement> getMeasurementPeriod(tm init, tm final); // not implemented yet
 
-    //vector<Measurement> getMeasurementsByAttribute(string attribute); //do we actually need it? not implemented yet
+    vector<Measurement> getMeasurementsByAttribute(string attribute); //do we actually need it? not implemented yet
 
     //vector<Measurement> getHistoriqueMesures(capteurID, attributID, nbDerniersJours); //do we actually need it? not implemented yet
-    void setStatus(); 
+    void setStatus(bool status); 
 
     void setUserID(string userID);
 

@@ -71,7 +71,7 @@ static float ecartType(const vector<float>& v) {
 
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor( Sensor& sensor)  {
+bool SensorValidator::isValidSensor( Sensor& sensor) {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
@@ -91,7 +91,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
                 Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
-                if (measurements.getAttribute().getAttibruteID() == mesureRecent.getAttribute().getAttibruteID()) { // Vérifie si l'attribut est le même
+                if (measurements.getAttribute().getAttributeID() == mesureRecent.getAttribute().getAttributeID()) { // Vérifie si l'attribut est le même
                 ValeurVoisines.push_back(measurements.getValue()); //Ajoute de cette valeur à la liste des valeurs voisines
                 }
             }
@@ -100,12 +100,40 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
 
     if (ValeurVoisines.size() < 2) return true; // Non déterminable, on considère valide car peut pas montrer le contraire
     // Calcul de la moyenne des valeurs voisines
+    float moyenneVoisins = mean(ValeurVoisines);
+    float ecartTypeVoisins = ecartType(ValeurVoisines);
+    float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
+    float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
 
-
-    return sensor.getStatus();
-
-
+    // Vérification si la dernière valeur est en dehors des bornes
+    if (lastvalue < borneBasse || lastvalue > borneHaute) {
+        sensor.setStatus(false); // Capteur invalide
+        return false;
+    } else {
+        sensor.setStatus(true); // Capteur valide
+    }
+    //Verification de la dernière valeur par rapport a l'historique 
+    vector<float> valeursMesures;
+    vector<Measurement> mesures = sensor.getMeasurements();
+    for (size_t i = 0; i < mesures.size(); ++i) {
+    float valeur = mesures[i].getValue();
+    valeursMesures.push_back(valeur);
 }
+    float moyenneHisto = mean(valeursMesures);
+    float ecartHisto = ecartType(valeursMesures);
+    float borneHistoMin = moyenneHisto - 3 * ecartHisto;
+    float borneHistoMax = moyenneHisto + 3 * ecartHisto;
+
+    // Vérification si la dernière valeur est en dehors des bornes de l'historique
+    if (lastvalue < borneHistoMin || lastvalue > borneHistoMax) {
+        sensor.setStatus(false); // Capteur invalide
+        return false;
+    } else {
+        sensor.setStatus(true); // Capteur valide
+}
+    return true; // Capteur valide
+}
+
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
 bool SensorValidator::isUserReliable(const User& user) {

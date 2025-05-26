@@ -15,7 +15,7 @@ public:
     User(string userId, vector<Sensor> associatedSensors);
     ~User();
 
-    void updateScore();
+    void updateScore(double score);
     void changeRealisable();
     
     bool getIsReliable() const;

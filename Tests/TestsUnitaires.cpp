@@ -2,7 +2,7 @@
 #include "../Include/Domain/Attribute.h"
 #include "../Include/Domain/Sensor.h"
 //#include "../Include/Domain/SensorValidator.h"
-//#include "../Include/Domain/AirQualityAnalyzer.h"
+#include "../Include/Domain/AirQualityAnalyzer.h"
 #include "../Include/Domain/User.h"
 #include "../Include/Presentation/ConsoleUI.h"
 #include "../Include/Infrastructure/CSVReader.h"
@@ -282,18 +282,53 @@ bool test27(){
     return true;
 }
 
+bool test28(){
+    cout<<"Runing Tests 27\n";
+    CSVReader reader;
+    reader.loadData();  
+
+    AirQualityAnalyzer airQualityAnalyzer(reader.getSensors());
+
+    std::tm init = {};
+    init.tm_year = 2019 - 1900;  
+    init.tm_mon  = 0;            
+    init.tm_mday = 1;            
+    init.tm_hour = 12;
+    init.tm_min  = 0;
+    init.tm_sec  = 0;
+
+
+    std::tm fin = {};
+    fin.tm_year = 2019 - 1900;   
+    fin.tm_mon  = 0;             
+    fin.tm_mday = 1;             
+    fin.tm_hour = 15;
+    fin.tm_min  = 0;
+    fin.tm_sec  = 0;
+
+    std::time_t t_init = std::mktime(&init);
+    std::time_t t_fin  = std::mktime(&fin);
+
+    airQualityAnalyzer.calculateAirQuality(0.5, 44, -1, init, fin);
+
+    return true;
+}
 
 
 
 int main() {
     //Test1(); Test2(); Test3(); Test4(); Test5(); 
-    //test21(); //test22(); //test23();
+    //test21(); //test22();
+     //test23();
     //test24();
     //test25();
     //test26();
-    test27();
+    //test27();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
+
+    test28();
+
     return 0;
 }
