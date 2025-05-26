@@ -1,4 +1,5 @@
 #include "SensorValidator.h"
+#include "../Infrastructure/CSVReader.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -58,6 +59,8 @@ bool SensorValidator::isValidSensor(const Sensor& sensor)  {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
+    CSVReader reader;
+    reader.loadSensors("../Data/sensors.csv"); // charge sensors et measurements
     return sensor.getStatus();
 
 
