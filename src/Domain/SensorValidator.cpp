@@ -7,11 +7,15 @@
 
 using namespace std;
 
+
 // Constructeur
 SensorValidator::SensorValidator() {}
 
 // Getters
 bool SensorValidator::getIsValidSensor() const {
+
+
+    
     #ifdef MAP 
     cout << "SensorValidator::getIsValidSensor()" << endl;
     #endif
