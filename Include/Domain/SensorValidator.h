@@ -20,11 +20,8 @@ public:
     vector<User> getMaliciousUsers() const;
 
     // Méthodes principales
-    bool isValidSensor(const Sensor& sensor) const;
-    bool isUserReliable(const User& user) const;
-    bool getIsValidSensor(const Sensor& sensor) ;
-    bool getIsUserReliable(const Sensor& sensor);
-
+    bool isValidSensor( Sensor& sensor) ;
+    bool isUserReliable( User& user);
     vector<User> detectMaliciousUsers(const vector<User>& users);
 };
 

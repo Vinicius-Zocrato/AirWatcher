@@ -12,10 +12,7 @@ AirQualityAnalyzer::AirQualityAnalyzer()
 
 }
 
-AirQualityAnalyzer::AirQualityAnalyzer(vector<Sensor> sensors)
-{
-    this->sensors = sensors;
-}
+
 
 double AirQualityAnalyzer::calculateSimilarity(const std::vector<Measurement>& m1,
     const std::vector<Measurement>& m2) {
