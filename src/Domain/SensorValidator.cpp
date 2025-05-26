@@ -55,12 +55,14 @@ static double distance(float lat1, float lon1, float lat2, float lon2) {
 
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor(const Sensor& sensor)  {
+bool SensorValidator::isValidSensor( Sensor& sensor)  {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
     CSVReader reader;
     reader.loadSensors("../Data/sensors.csv"); // charge sensors et measurements
+
+    Measurement mesureRecent = sensor.getMeasurements()[0];
     return sensor.getStatus();
 
 
