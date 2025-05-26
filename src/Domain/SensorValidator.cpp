@@ -13,12 +13,10 @@ SensorValidator::SensorValidator() {}
 
 // Getters
 bool SensorValidator::getIsValidSensor(const Sensor& sensor) const {
-
-
-    
     #ifdef MAP 
     cout << "SensorValidator::getIsValidSensor()" << endl;
     #endif
+    bool isValidSensor = sensor.getStatus();
     return isValidSensor;
 }
 
