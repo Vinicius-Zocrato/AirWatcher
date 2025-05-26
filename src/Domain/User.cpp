@@ -25,7 +25,7 @@ vector<Sensor> User::getAssociatedSensors() const {
     return associatedSensors;
 }
 
-void  User::inserAssociatedSensor(Sensor sensor){
+void  User::insertSensor(Sensor sensor){
     this->associatedSensors.push_back(sensor);
 }
 
