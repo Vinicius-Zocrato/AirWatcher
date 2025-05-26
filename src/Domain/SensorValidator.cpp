@@ -53,6 +53,22 @@ static double distance(float lat1, float lon1, float lat2, float lon2) {
     return R * c;
 }
 
+// Moyenne
+static float mean(const vector<float>& v) {
+    if (v.empty()) return 0.0f;
+    return std::accumulate(v.begin(), v.end(), 0.0f) / v.size();
+}
+
+// Ecart-type
+static float ecartType(const vector<float>& v) {
+    if (v.size() < 2) return 0.0f;
+    float m = mean(v);
+    float sum = 0.0f;
+    for (float x : v) sum += (x - m) * (x - m);
+    return sqrt(sum / (v.size() - 1));
+}
+
+
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
 bool SensorValidator::isValidSensor( Sensor& sensor)  {
@@ -81,6 +97,9 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
             }
         }
     }
+
+    if (ValeurVoisines.size() < 2) return true; // Non déterminable, on considère valide car peut pas montrer le contraire
+    // Calcul de la moyenne des valeurs voisines
 
 
     return sensor.getStatus();
