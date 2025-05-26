@@ -75,6 +75,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
                 Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
+                if (measurements.getAttribute().getAttibruteID() == mesureRecent.getAttribute().getAttibruteID()) { // Vérifie si l'attribut est le même
                 ValeurVoisines.push_back(measurements.getValue()); //Ajoute de cette valeur à la liste des valeurs voisines
                 }
             }
