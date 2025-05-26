@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
-
+#include "Sensor.h"
 using namespace std;
 
 
@@ -13,8 +13,10 @@ public:
     Cleaner();
     Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStampStart, tm TimeStampStop);
     ~Cleaner();
+
     bool isActiveAt(time_t time);
-    double estimatedImpact();
+    double estimatedImpact(Sensor sensor); 
+
     string getCleanerID();
     float getLatitude();
     float getLongitude();
