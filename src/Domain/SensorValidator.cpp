@@ -71,7 +71,7 @@ static float ecartType(const vector<float>& v) {
 
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
+bool SensorValidator::isValidSensor( Sensor& sensor) { {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
@@ -91,7 +91,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
                 Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
-                if (measurements.getAttribute().getAttibruteID() == mesureRecent.getAttribute().getAttibruteID()) { // Vérifie si l'attribut est le même
+                if (measurements.getAttribute().getAttributeID() == mesureRecent.getAttribute().getAttributeID()) { // Vérifie si l'attribut est le même
                 ValeurVoisines.push_back(measurements.getValue()); //Ajoute de cette valeur à la liste des valeurs voisines
                 }
             }
@@ -104,7 +104,6 @@ bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
     float ecartTypeVoisins = ecartType(ValeurVoisines);
     float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
     float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
-    bool indiceVoisin = (valeur < borneBasse || valeur > borneHaute);
 
     return sensor.getStatus();
 
