@@ -24,7 +24,8 @@ bool SensorValidator::getIsUserReliable(const User& user) const {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
-    return isValidSensor;
+    bool isUserReliable = user.getIsReliable();
+    return isUserReliable;
 }
 
 std::vector<User> SensorValidator::getMaliciousUsers() const {
