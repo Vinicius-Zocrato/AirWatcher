@@ -136,7 +136,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor) {
 
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable(const User& user) {
+bool SensorValidator::isUserReliable( User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
@@ -150,9 +150,16 @@ bool SensorValidator::isUserReliable(const User& user) {
             nbSensorsFalse++;
         }
     }
+    // Si plus de 3 capteurs invalides ou plus de 50% des capteurs sont invalides, l'utilisateur est considéré comme non fiable
+    if (nbSensorsFalse > 3 || (static_cast<float>(nbSensorsFalse) / sensors.size()) > 0.5) {
+        return false; // L'utilisateur n'est pas fiable
+        user.changeRealisable();
+    }
+    else {
+        return true; // L'utilisateur est fiable
+    }
 
 
-    return user.getIsReliable();
 }
 
 // Méthode : Détecte les utilisateurs malveillants
@@ -163,12 +170,11 @@ vector<User> SensorValidator::detectMaliciousUsers(const vector<User>& users) {
 
 
     maliciousUsers.clear();  // Réinitialiser
-
+    // Parcourir la liste des utilisateurs et vérifier leur fiabilité
     for (const auto& user : users) {
         if (!isUserReliable(user)) {
             maliciousUsers.push_back(user);
         }
     }
-
     return maliciousUsers;
 }
