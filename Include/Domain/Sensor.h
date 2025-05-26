@@ -34,7 +34,7 @@ public:
 
     vector<Measurement> getMeasurementPeriod(tm init, tm final); // not implemented yet
 
-    void setStatus();
+    void setStatus(bool status); 
 
     void setUserID(string userID);
 
