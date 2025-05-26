@@ -22,9 +22,6 @@ public:
     // Méthodes principales
     bool isValidSensor(const Sensor& sensor) ;
     bool isUserReliable(const User& user);
-    bool SetIsValidSensor(const Sensor& sensor) ;
-    bool SetIsUserReliable(const Sensor& sensor);
-
     vector<User> detectMaliciousUsers(const vector<User>& users);
 };
 

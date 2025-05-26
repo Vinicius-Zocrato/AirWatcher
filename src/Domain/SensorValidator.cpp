@@ -47,7 +47,7 @@ bool SensorValidator::isValidSensor(const Sensor& sensor)  {
 }
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable(const User& user) const {
+bool SensorValidator::isUserReliable(const User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
