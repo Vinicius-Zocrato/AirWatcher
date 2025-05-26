@@ -12,15 +12,15 @@ using namespace std;
 SensorValidator::SensorValidator() {}
 
 // Getters
-bool SensorValidator::getIsValidSensor(bool status)  {
+bool SensorValidator::getIsValidSensor(const Sensor& sensor, bool status)  {
     #ifdef MAP 
     cout << "SensorValidator::getIsValidSensor()" << endl;
     #endif
-    //bool isValidSensor = sensor.getStatus();
-   // return isValidSensor;
+    sensor.setStatus(status);
+   return isValidSensor(sensor);
 }
 
-bool SensorValidator::getIsUserReliable(bool status)   {
+bool SensorValidator::getIsUserReliable(const Sensor& sensor, bool status)   {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
