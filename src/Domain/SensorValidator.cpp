@@ -12,32 +12,32 @@ using namespace std;
 SensorValidator::SensorValidator() {}
 
 // Getters
-bool SensorValidator::getIsValidSensor(const Sensor& sensor)  {
-    #ifdef MAP 
-    cout << "SensorValidator::getIsValidSensor()" << endl;
-    #endif
-    sensor.setStatus();
-   return isValidSensor(sensor);
-}
+// bool SensorValidator::SetIsValidSensor( Sensor& sensor)  {
+//     #ifdef MAP 
+//     cout << "SensorValidator::getIsValidSensor()" << endl;
+//     #endif
+//   sensor.setStatus(); 
+// return isValidSensor(sensor);
+// }
 
-bool SensorValidator::getIsUserReliable(const Sensor& sensor)   {
-    #ifdef MAP 
-    cout << "SensorValidator::getIsUserReliable()" << endl;
-    #endif
-    //bool isUserReliable = user.getIsReliable();
-    //return isUserReliable;
-}
+// bool SensorValidator::SetIsUserReliable( Sensor& sensor)   {
+//     #ifdef MAP 
+//     cout << "SensorValidator::getIsUserReliable()" << endl;
+//     #endif
+//     //bool isUserReliable = user.getIsReliable();
+//     //return isUserReliable;
+// }
 
-std::vector<User> SensorValidator::getMaliciousUsers() const {
-    #ifdef MAP 
-    cout << "SensorValidator::getMaliciousUsers()" << endl;
-    #endif
+// std::vector<User> SensorValidator::getMaliciousUsers()  {
+//     #ifdef MAP 
+//     cout << "SensorValidator::getMaliciousUsers()" << endl;
+//     #endif
 
-    return maliciousUsers;
-}
+//     return maliciousUsers;
+// }
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor(const Sensor& sensor) const {
+bool SensorValidator::isValidSensor(const Sensor& sensor)  {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
