@@ -53,18 +53,36 @@ static double distance(float lat1, float lon1, float lat2, float lon2) {
     return R * c;
 }
 
+// Moyenne
+static float mean(const vector<float>& v) {
+    if (v.empty()) return 0.0f;
+    return std::accumulate(v.begin(), v.end(), 0.0f) / v.size();
+}
+
+// Ecart-type
+static float ecartType(const vector<float>& v) {
+    if (v.size() < 2) return 0.0f;
+    float m = mean(v);
+    float sum = 0.0f;
+    for (float x : v) sum += (x - m) * (x - m);
+    return sqrt(sum / (v.size() - 1));
+}
+
+
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor( Sensor& sensor)  {
+bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
     CSVReader reader;
     reader.loadSensors("../Data/sensors.csv"); // charge sensors et measurements
 
+    // Récupere la dernière mesure du capteur
     Measurement mesureRecent = sensor.getMeasurements()[0];
     float lastvalue = mesureRecent.getValue();
 
+    //On va tester cette dernoière valeur par rapport aux valeurs voisines
     vector<float> ValeurVoisines;
     vector<Sensor> sensors = reader.getSensors();
     for (size_t i = 0; i < sensors.size(); i++) {
@@ -73,12 +91,20 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
                 Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
-                ValeurVoisines.push_back(measurements.getValue());
+                if (measurements.getAttribute().getAttibruteID() == mesureRecent.getAttribute().getAttibruteID()) { // Vérifie si l'attribut est le même
+                ValeurVoisines.push_back(measurements.getValue()); //Ajoute de cette valeur à la liste des valeurs voisines
                 }
             }
         }
     }
 
+    if (ValeurVoisines.size() < 2) return true; // Non déterminable, on considère valide car peut pas montrer le contraire
+    // Calcul de la moyenne des valeurs voisines
+    float moyenneVoisins = mean(ValeurVoisines);
+    float ecartTypeVoisins = ecartType(ValeurVoisines);
+    float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
+    float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
+    bool indiceVoisin = (valeur < borneBasse || valeur > borneHaute);
 
     return sensor.getStatus();
 

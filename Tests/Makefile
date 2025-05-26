@@ -1,39 +1,42 @@
-# Makefile (à la racine du projet)
-CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -IInclude
+# ========================
+# Makefile pour les tests
+# ========================
 
-# Répertoires de code
-SRC_DIRS := \
-    ../src/Domain \
-    ../src/Infrastructure \
-    ../src/Presentation
+# Nom du compilateur
+CXX = g++
 
-# Fichiers que nous NE voulons PAS compiler
-EXCLUDE  := \
-    ../src/Domain/AirQualityAnalyzer.cpp \
-    ../src/Domain/SensorValidator.cpp
+# Répertoires
+TEST_DIR := .
+SRC_DIR := ../src
+INCLUDE_DIR := ../Include
+OBJ_DIR := out
+BIN_DIR := exe
 
-# Recherche tous les .cpp, puis supprime ceux qui sont dans EXCLUDE
-ALL_SRCS := $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.cpp))
-SRCS     := $(filter-out $(EXCLUDE),$(ALL_SRCS)) TestsUnitaires.cpp
+# Flags
+INCLUDE_DIRS := $(shell find $(INCLUDE_DIR) -type d)
+CXXFLAGS = -std=c++11  $(addprefix -I, $(INCLUDE_DIRS)) -I$(SRC_DIR)
 
-# Convertit la liste de .cpp en liste de .o
-OBJS     := $(SRCS:.cpp=.o)
+# Fichiers source des tests (chaque .cpp dans ce dossier avec main)
+TEST_SOURCES := $(wildcard $(TEST_DIR)/*.cpp)
+TEST_NAMES := $(notdir $(basename $(TEST_SOURCES)))
+EXECUTABLES := $(addprefix $(BIN_DIR)/,$(TEST_NAMES))
 
-# Exécutable de tests
-TARGET   := run_tests
+# Sources de l'application
+APP_SOURCES := $(shell find $(SRC_DIR) -name "*.cpp")
 
-.PHONY: all clean
+# Règle principale
+all: $(BIN_DIR) $(EXECUTABLES)
 
-all: $(TARGET)
+# Crée le dossier exe s'il n'existe pas
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
-# Lie tous les .o dans l'exécutable
-$(TARGET): $(OBJS)
+# Compilation des tests avec les sources de l'application
+$(BIN_DIR)/%: $(TEST_DIR)/%.cpp $(APP_SOURCES)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# Règle générique pour compiler .cpp en .o
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
+# Nettoyage
 clean:
-	del /Q "..\\src\\Domain\\Attribute.o" "..\\src\\Domain\\Measurement.o" "..\\src\\Domain\\Sensor.o" "..\\src\\Domain\\User.o" "..\\src\\Domain\\Cleaner.o" "..\\src\\Domain\\Provider.o" "..\\src\\Infrastructure\\CSVReader.o" "..\\src\\Presentation\\ConsoleUI.o" "..\\Tests\\TestsUnitaires.o" "run_tests.exe"
+	rm -rf $(BIN_DIR)
+
+.PHONY: all clean
