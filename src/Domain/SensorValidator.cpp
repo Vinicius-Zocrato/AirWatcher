@@ -105,6 +105,13 @@ bool SensorValidator::isValidSensor( Sensor& sensor) { {
     float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
     float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
 
+    // Vérification si la dernière valeur est en dehors des bornes
+    if (lastvalue < borneBasse || lastvalue > borneHaute) {
+        sensor.setStatus(false); // Capteur invalide
+        return false;
+    } else {
+        sensor.setStatus(true); // Capteur valide
+    }
     //Verification de la dernière valeur par rapport a l'historique 
     vector<float> valeursMesures;
     vector<Measurement> mesures = sensor.getMeasurements();
@@ -117,7 +124,14 @@ bool SensorValidator::isValidSensor( Sensor& sensor) { {
     float borneHistoMin = moyenneHisto - 3 * ecartHisto;
     float borneHistoMax = moyenneHisto + 3 * ecartHisto;
 
+    // Vérification si la dernière valeur est en dehors des bornes de l'historique
+    if (lastvalue < borneHistoMin || lastvalue > borneHistoMax) {
+        sensor.setStatus(false); // Capteur invalide
+        return false;
+    } else {
+        sensor.setStatus(true); // Capteur valide
 }
+
 
 
     return sensor.getStatus();
