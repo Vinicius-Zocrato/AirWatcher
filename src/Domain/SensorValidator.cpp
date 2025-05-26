@@ -131,13 +131,9 @@ bool SensorValidator::isValidSensor( Sensor& sensor) {
     } else {
         sensor.setStatus(true); // Capteur valide
 }
-
-
-
-    return sensor.getStatus();
-
-
+    return true; // Capteur valide
 }
+
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
 bool SensorValidator::isUserReliable(const User& user) {
