@@ -62,9 +62,11 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
     CSVReader reader;
     reader.loadSensors("../Data/sensors.csv"); // charge sensors et measurements
 
+    // Récupere la dernière mesure du capteur
     Measurement mesureRecent = sensor.getMeasurements()[0];
     float lastvalue = mesureRecent.getValue();
 
+    //On va tester cette dernoière valeur par rapport aux valeurs voisines
     vector<float> ValeurVoisines;
     vector<Sensor> sensors = reader.getSensors();
     for (size_t i = 0; i < sensors.size(); i++) {
@@ -73,7 +75,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
                 Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
-                ValeurVoisines.push_back(measurements.getValue());
+                ValeurVoisines.push_back(measurements.getValue()); //Ajoute de cette valeur à la liste des valeurs voisines
                 }
             }
         }
