@@ -15,7 +15,12 @@ public:
     ~Cleaner();
     bool isActiveAt(time_t time);
     double estimatedImpact();
-
+    string getCleanerID();
+    float getLatitude();
+    float getLongitude();
+    tm getTimeStampStart();
+    tm getTimeStampStop();
+    void toString() const;
 
 
 private:

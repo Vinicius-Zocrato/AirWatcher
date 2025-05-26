@@ -1,8 +1,8 @@
 #include "../Include/Domain/Measurement.h"
 #include "../Include/Domain/Attribute.h"
 #include "../Include/Domain/Sensor.h"
-#include "../Include/Domain/SensorValidator.h"
-#include "../Include/Domain/AirQualityAnalyzer.h"
+//#include "../Include/Domain/SensorValidator.h"
+//#include "../Include/Domain/AirQualityAnalyzer.h"
 #include "../Include/Domain/User.h"
 #include "../Include/Presentation/ConsoleUI.h"
 #include "../Include/Infrastructure/CSVReader.h"
@@ -14,11 +14,11 @@
 /*
 bool Test1()
 {
-    Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
-    SensorValidator validator;
-    bool result = validator.isValidSensor(s);
-    std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
-    return result;
+    // Sensor s("S1", -999.0, 999.0); // clearly invalid coordinates
+    // SensorValidator validator;
+    // bool result = validator.isValidSensor(s);
+    // std::cout << "Test isValidSensor - Invalid coordinates: " << (result == false ? "PASS" : "FAIL") << "\n";
+    // return result;
 }
 bool Test2()
 {
@@ -38,10 +38,10 @@ bool Test3()
 bool Test4()
 {
     
-    std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
-    User user("U1", sensors);
-    auto result = user.getAssociatedSensors();
-    std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
+    // std::vector<Sensor> sensors = { Sensor("S1", 45, 5) };
+    // User user("U1", sensors);
+    // auto result = user.getAssociatedSensors();
+    // std::cout << "Test getAssociatedSensors -  " << (result.empty() ? "FAIL" : "PASS") << "\n";
 }
 bool Test5()
 {
@@ -176,21 +176,122 @@ bool Test20() {
 }*/
 
 bool test21(){
-    CSVReader reader("attributes.csv");
-
-    reader.loadAttributes();
+    cout<<"Runing Tests 21\n";
+    CSVReader reader;
+    reader.loadAttributes("../Data/attributes.csv");
 
     for (size_t i = 0; i < reader.getAttributes().size(); i++)
     {
         reader.getAttributes()[i].toString();
     }
 
+    cout<<endl<<endl;
+
     return true;
 }
 
+bool test22(){
+    cout<<"Runing Tests 22\n";
+    CSVReader reader;
+    reader.loadCleaners("../Data/cleaners.csv");
+
+    for (size_t i = 0; i < reader.getCleaners().size(); i++)
+    {
+        reader.getCleaners()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test23(){
+    cout<<"Runing Tests 23\n";
+    CSVReader reader;
+    reader.loadMeasurements("../Data/measurements.csv");
+
+    for (size_t i = 0; i < reader.getMeasurements().size(); i++)
+    {
+        reader.getMeasurements()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test24(){
+    cout<<"Runing Tests 24\n";
+    CSVReader reader;
+    reader.loadProviders("../Data/providers.csv");
+
+    for (size_t i = 0; i < reader.getProviders().size(); i++)
+    {
+        reader.getProviders()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test25(){
+    cout<<"Runing Tests 25\n";
+    CSVReader reader;
+    reader.loadSensors("../Data/sensors.csv");
+
+    for (size_t i = 0; i < 1; i++)
+    {
+        reader.getSensors()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test26(){
+    cout<<"Runing Tests 26\n";
+    CSVReader reader;
+    reader.loadUsers("../Data/users.csv");
+
+    for (size_t i = 0; i < reader.getUsers().size(); i++)
+    {
+        reader.getUsers()[i].toString();
+    }
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+bool test27(){
+    cout<<"Runing Tests 26\n";
+    CSVReader reader;
+    reader.loadData();
+
+    reader.getAttributes()[0].toString();
+    reader.getCleaners()[0].toString();
+    reader.getMeasurements()[0].toString();
+    reader.getProviders()[0].toString();
+    reader.getSensors()[0].toString();
+    reader.getUsers()[0].toString();
+
+    cout<<endl<<endl;
+
+    return true;
+}
+
+
+
+
 int main() {
     //Test1(); Test2(); Test3(); Test4(); Test5(); 
-    test21();
+    //test21(); //test22(); //test23();
+    //test24();
+    //test25();
+    //test26();
+    test27();
     //Test6(); Test7(); Test8(); Test9(); Test10();
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();

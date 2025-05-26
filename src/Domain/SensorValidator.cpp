@@ -7,33 +7,37 @@
 
 using namespace std;
 
+
 // Constructeur
 SensorValidator::SensorValidator() {}
 
 // Getters
-bool SensorValidator::getIsValidSensor() const {
+bool SensorValidator::getIsValidSensor(const Sensor& sensor)  {
     #ifdef MAP 
     cout << "SensorValidator::getIsValidSensor()" << endl;
     #endif
-    return isValidSensor;
+    sensor.setStatus();
+   return isValidSensor(sensor);
 }
 
-bool SensorValidator::getIsUserReliable() const {
+bool SensorValidator::getIsUserReliable(const Sensor& sensor)   {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
-    return isUserReliable;
+    //bool isUserReliable = user.getIsReliable();
+    //return isUserReliable;
 }
 
 std::vector<User> SensorValidator::getMaliciousUsers() const {
     #ifdef MAP 
     cout << "SensorValidator::getMaliciousUsers()" << endl;
     #endif
+
     return maliciousUsers;
 }
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor(const Sensor& sensor) {
+bool SensorValidator::isValidSensor(const Sensor& sensor) const {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
@@ -43,7 +47,7 @@ bool SensorValidator::isValidSensor(const Sensor& sensor) {
 }
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable(const User& user) {
+bool SensorValidator::isUserReliable(const User& user) const {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif

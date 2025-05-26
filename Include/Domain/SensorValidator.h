@@ -10,6 +10,9 @@ using namespace std;
 class SensorValidator {
 private: 
     vector <User> maliciousUsers;
+    bool isValidSensor(const Sensor& sensor);
+    bool isUserReliable(const User& user);
+    vector<User> detectMaliciousUsers(const vector<User>& users);
 public:
     SensorValidator();
 
@@ -17,8 +20,11 @@ public:
     vector<User> getMaliciousUsers() const;
 
     // Méthodes principales
-    bool isValidSensor(const Sensor& sensor);
-    bool isUserReliable(const User& user);
+    bool isValidSensor(const Sensor& sensor) const;
+    bool isUserReliable(const User& user) const;
+    bool getIsValidSensor(const Sensor& sensor) ;
+    bool getIsUserReliable(const Sensor& sensor);
+
     vector<User> detectMaliciousUsers(const vector<User>& users);
 };
 
