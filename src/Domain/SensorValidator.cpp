@@ -170,12 +170,11 @@ vector<User> SensorValidator::detectMaliciousUsers(const vector<User>& users) {
 
 
     maliciousUsers.clear();  // Réinitialiser
-
+    // Parcourir la liste des utilisateurs et vérifier leur fiabilité
     for (const auto& user : users) {
         if (!isUserReliable(user)) {
             maliciousUsers.push_back(user);
         }
     }
-
     return maliciousUsers;
 }
