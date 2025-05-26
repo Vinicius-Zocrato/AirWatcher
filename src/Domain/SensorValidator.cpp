@@ -104,7 +104,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor, float valeur) { {
     float ecartTypeVoisins = ecartType(ValeurVoisines);
     float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
     float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
-    bool suspectSpatial = (valeur < borneBasse || valeur > borneHaute);
+    bool indiceVoisin = (valeur < borneBasse || valeur > borneHaute);
 
     return sensor.getStatus();
 
