@@ -12,32 +12,32 @@ using namespace std;
 SensorValidator::SensorValidator() {}
 
 // Getters
-bool SensorValidator::getIsValidSensor(const Sensor& sensor) const {
+bool SensorValidator::getIsValidSensor(bool status)  {
     #ifdef MAP 
     cout << "SensorValidator::getIsValidSensor()" << endl;
     #endif
-    bool isValidSensor = sensor.getStatus();
-    return isValidSensor;
+    //bool isValidSensor = sensor.getStatus();
+   // return isValidSensor;
 }
 
-bool SensorValidator::getIsUserReliable(const User& user) const {
+bool SensorValidator::getIsUserReliable(bool status)   {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
-    bool isUserReliable = user.getIsReliable();
-    return isUserReliable;
+    //bool isUserReliable = user.getIsReliable();
+    //return isUserReliable;
 }
 
 std::vector<User> SensorValidator::getMaliciousUsers() const {
     #ifdef MAP 
     cout << "SensorValidator::getMaliciousUsers()" << endl;
     #endif
-    
+
     return maliciousUsers;
 }
 
 // Méthode : Vérifie si un capteur est valide (exemple simple basé sur une condition)
-bool SensorValidator::isValidSensor(const Sensor& sensor) {
+bool SensorValidator::isValidSensor(const Sensor& sensor) const {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
@@ -47,7 +47,7 @@ bool SensorValidator::isValidSensor(const Sensor& sensor) {
 }
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable(const User& user) {
+bool SensorValidator::isUserReliable(const User& user) const {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
