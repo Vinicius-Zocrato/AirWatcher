@@ -20,8 +20,8 @@ vector<Measurement> Sensor::getMeasurements(){
     return this->measurements;
 }
 
-void Sensor::setStatus(){
-    this->status = !this->status;
+void Sensor::setStatus(bool status){
+    this->status = status;
 }
 
 void Sensor::setUserID(string userID){
