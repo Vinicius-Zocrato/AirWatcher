@@ -105,6 +105,20 @@ bool SensorValidator::isValidSensor( Sensor& sensor) { {
     float borneBasse = moyenneVoisins - 2 * ecartTypeVoisins;
     float borneHaute = moyenneVoisins + 2 * ecartTypeVoisins;
 
+    //Verification de la dernière valeur par rapport a l'historique 
+    vector<float> valeursMesures;
+    for(int i; sensor.getMeasurements().size() ; i++) {
+        float valeur = sensor.addMeasurement()[i].getValue();
+        valeursMesures.push_back(valeur);
+    }
+    float moyenneHisto = mean(valeursMesures);
+    float ecartHisto = ecartType(valeursMesures);
+    float borneHistoMin = moyenneHisto - 3 * ecartHisto;
+    float borneHistoMax = moyenneHisto + 3 * ecartHisto;
+
+}
+
+
     return sensor.getStatus();
 
 
