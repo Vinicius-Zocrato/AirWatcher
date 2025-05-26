@@ -10,7 +10,9 @@
 #include "Measurement.h"
 
 using namespace std;
-
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 // Constructeur
 SensorValidator::SensorValidator() {}
@@ -153,7 +155,7 @@ bool SensorValidator::isUserReliable( User& user) {
     // Si plus de 3 capteurs invalides ou plus de 50% des capteurs sont invalides, l'utilisateur est considéré comme non fiable
     if (nbSensorsFalse > 3 || (static_cast<float>(nbSensorsFalse) / sensors.size()) > 0.5) {
         return false; // L'utilisateur n'est pas fiable
-        user.changeRealisable();
+        user.setIsReliable(false);
     }
     else {
         return true; // L'utilisateur est fiable
