@@ -5,8 +5,8 @@ using namespace std;
 
 void displayMenu()
 {
-    std::cout << "1. Add Sensor" << std::endl;
-    std::cout << "2. Add Measurement" << std::endl;
+    std::cout << "1. " << std::endl;
+    std::cout << "2. " << std::endl;
     std::cout << "3. Display Sensors" << std::endl;
     std::cout << "4. Display Measurements" << std::endl;
     std::cout << "5. Exit" << std::endl;

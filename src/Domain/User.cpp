@@ -29,8 +29,11 @@ void  User::inserAssociatedSensor(Sensor sensor){
     this->associatedSensors.push_back(sensor);
 }
 
-void User::updateScore() {
-    score += 1;
+void User::updateScore(double delta = 1.0) {
+    score += static_cast<int>(delta);
+    if (score < 0) {
+        score = 0; // Ensure score does not go negative
+    }
 }
 
 void User::changeRealisable() {
