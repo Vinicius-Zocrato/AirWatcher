@@ -12,7 +12,7 @@ using namespace std;
 SensorValidator::SensorValidator() {}
 
 // Getters
-bool SensorValidator::getIsValidSensor() const {
+bool SensorValidator::getIsValidSensor(const Sensor& sensor) const {
 
 
     
@@ -22,7 +22,7 @@ bool SensorValidator::getIsValidSensor() const {
     return isValidSensor;
 }
 
-bool SensorValidator::getIsUserReliable() const {
+bool SensorValidator::getIsUserReliable(const User& user) const {
     #ifdef MAP 
     cout << "SensorValidator::getIsUserReliable()" << endl;
     #endif
