@@ -1,10 +1,3 @@
-#include "../../Include/Domain/AirQualityAnalyzer.h"
-#include <algorithm>
-#include <string_view>
-#include <array>
-#include <iomanip>
-#include <cmath>
-#include <math.h>
 
 AirQualityAnalyzer::AirQualityAnalyzer(vector<Sensor> sensors){
     this->sensors = sensors;
@@ -166,75 +159,44 @@ void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, floa
 
 }
 
-AirQualityAnalyzer::AirQualityAnalyzer()
-{
 
-}
+//Makefile
 
-<<<<<<< Updated upstream
+# Makefile (à la racine du projet)
+CXX      := g++
+CXXFLAGS := -std=c++17 -Wall -IInclude -w
 
+# Répertoires de code
+SRC_DIRS := \
+    ../src/Domain \
+    ../src/Infrastructure \
+    ../src/Presentation
 
-=======
->>>>>>> Stashed changes
-double AirQualityAnalyzer::calculateSimilarity(const std::vector<Measurement>& m1,
-    const std::vector<Measurement>& m2) {
-    // TODO
-    return 0.0;
-}
+# Fichiers que nous NE voulons PAS compiler
+EXCLUDE  := \
+    ../src/Domain/SensorValidator.cpp
 
-/*
+# Recherche tous les .cpp, puis supprime ceux qui sont dans EXCLUDE
+ALL_SRCS := $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.cpp))
+SRCS     := $(filter-out $(EXCLUDE),$(ALL_SRCS)) TestsUnitaires.cpp
 
-std::vector<Sensor> AirQualityAnalyzer::findMostSimilarSensors(Sensor target,
-vector<Sensor> others, int topN) {
+# Convertit la liste de .cpp en liste de .o
+OBJS     := $(SRCS:.cpp=.o)
 
-    std::vector<std::pair<Sensor, double>> scoredSensors;
+# Exécutable de tests
+TARGET   := run_tests
 
-    // Récupère les mesures du capteur de référence
-    std::vector<Measurement> targetMeasurements = target.getMeasurements();
+.PHONY: all clean
 
-    for (const Sensor& other : others) {
-        if (other.getId() == target.getId()) continue;
+all: $(TARGET)
 
-        // Récupère les mesures du capteur comparé
-        std::vector<Measurement> otherMeasurements = other.getMeasurements();
+# Lie tous les .o dans l'exécutable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-        // Calcule la similarité entre les deux capteurs
-        double similarityScore = calculateSimilarity(targetMeasurements, otherMeasurements);
+# Règle générique pour compiler .cpp en .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-        scoredSensors.emplace_back(other, similarityScore);
-    }
-
-    // Trie par score croissant (plus petit = plus similaire)
-    std::sort(scoredSensors.begin(), scoredSensors.end(),
-              [](const auto& a, const auto& b) { return a.second < b.second; });
-
-    // Prend les top N capteurs
-    std::vector<Sensor> result;
-    for (int i = 0; i < topN && i < scoredSensors.size(); ++i) {
-        result.push_back(scoredSensors[i].first);
-    }
-
-    return result;
-}
-*/
-
-double AirQualityAnalyzer::computeAverage() {
-    // TODO
-    return 0.0;
-}
-
-std::vector<Sensor> AirQualityAnalyzer::rankSensorByQuality() {
-    // TODO
-    return {};
-}
-
-Sensor AirQualityAnalyzer::findSensorById(string const capteurId) const
-{
-    for( int i = 0 ; i < sensors.size(); i++)
-    {
-        if (sensors[i].getId() ==  capteurId) 
-        {
-            return sensors[i];
-        }
-    }
-}
+clean:
+	del /Q "..\\src\\Domain\\Attribute.o" "..\\src\\Domain\\AirQualityAnalyzer.o" "..\\src\\Domain\\Measurement.o" "..\\src\\Domain\\Sensor.o" "..\\src\\Domain\\User.o" "..\\src\\Domain\\Cleaner.o" "..\\src\\Domain\\Provider.o" "..\\src\\Infrastructure\\CSVReader.o" "..\\src\\Presentation\\ConsoleUI.o" "..\\Tests\\TestsUnitaires.o" "run_tests.exe"

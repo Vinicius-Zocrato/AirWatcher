@@ -17,7 +17,7 @@ public:
     AirQualityAnalyzer();
     AirQualityAnalyzer(vector<Sensor> sensors);
     vector<Sensor> getSensors() const;  //not   implemented yet
-    double calculateAirQuality(int radius, float latitude, float longitude, const string& attributeID); // not implemented yet
+    void calculateAirQuality(double radius, float latitude, float longitude, tm init, tm fin);
     double calculateSimilarity(const std::vector<Measurement>& m1,const std::vector<Measurement>& m2); 
     vector<Sensor> findMostSimilarSensors(Sensor target, int topN); //not implemented yet
     double computeAverage();  
