@@ -36,8 +36,8 @@ void User::updateScore(double delta = 1.0) {
     }
 }
 
-void User::changeRealisable() {
-    isReliable = !isReliable;
+void User::setIsReliable(bool reliability) {
+    isReliable = reliability;
 }
 
 bool User::getIsReliable() const {
