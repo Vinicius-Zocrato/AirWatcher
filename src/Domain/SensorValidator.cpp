@@ -67,14 +67,13 @@ bool SensorValidator::isValidSensor( Sensor& sensor)  {
 
     vector<float> ValeurVoisines;
     vector<Sensor> sensors = reader.getSensors();
-    for (size_t i = 0; i < sensors.size(); ++i) {
-        const Sensor& s = sensors[i];
+    for (size_t i = 0; i < sensors.size(); i++) {
+        Sensor& s = sensors[i];
         if (s.getId() != sensor.getId()) { // Exclure le capteur lui-même
             float dist = distance(sensor.getLatitude(), sensor.getLongitude(), s.getLatitude(), s.getLongitude());
             if (dist < 0.5) { // Seuil de proximité de 0.5 km
-                vector<Measurement> measurements = s.getMeasurements();
-                for (size_t j = 0; j < measurements.size(); ++j) {
-                    ValeurVoisines.push_back(measurements[j].getValue());
+                Measurement measurements = s.getMeasurements()[0]; // On prend la première mesure pour simplifier
+                ValeurVoisines.push_back(measurements.getValue());
                 }
             }
         }
