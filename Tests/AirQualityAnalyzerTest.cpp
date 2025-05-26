@@ -1,50 +1,59 @@
 #include <cassert>
 #include "AirQualityAnalyzer.h"
 #include "Sensor.h"
-
-// int main() {
-//     AirQualityAnalyzer analyzer;
-
-//     // Cas 1 : liste vide -> la moyenne doit être 0.0
-//     std::vector<Measurement> vide;
-//     double avg = analyzer.computeAverage("O3", vide);
-//     assert(avg == 0.0);
-
-//     // Cas 2 : pas de capteurs à comparer -> capteurs similaires vides
-//     Sensor cible("S1", 45.0, 5.0);
-//     std::vector<Sensor> listeVide;
-//     auto sim = analyzer.findMostSimilarSensors(cible, listeVide, 3);
-//     assert(sim.empty());
-
-//     return 0;
-// }
-
 #include "SensorValidator.h"
-#include "Sensor.h"
 #include <iostream>
-using namespace std;
 #include <cstdlib>
+#include <ctime>
 
+using namespace std;
 
 int main(int argc, char* argv[])
 {
-
     AirQualityAnalyzer analyzer;
 
-    if (argc > 2)
+    if (argc != 2)
     {
-        cerr << ("Arguments trop nombreux ou Invalide ") << endl;
+        cerr << "Usage : ./program <testNumber>" << endl;
         return -1;
     }
-    int caseTest = atoi(argv[argc]);
+
+    int caseTest = atoi(argv[1]);
     if (caseTest == 1)
     {
-        //Test1
-        
+        // Test de la méthode calculateSimilarity
+
+        // Création d'attributs fictifs
+        Attribute attrO3("O3");
+        Attribute attrNO2("NO2");
+
+        // Timestamp arbitraire
+        tm t = {};
+        t.tm_year = 125; // 2025
+        t.tm_mon = 4;    // Mai
+        t.tm_mday = 26;
+
+        // Création de mesures pour capteur A
+        vector<Measurement> m1 = {
+            Measurement(t, attrO3, 50.0f, "A"),
+            Measurement(t, attrNO2, 30.0f, "A")
+        };
+
+        // Création de mesures pour capteur B
+        vector<Measurement> m2 = {
+            Measurement(t, attrO3, 48.0f, "B"),
+            Measurement(t, attrNO2, 32.0f, "B")
+        };
+
+        // Calcul de similarité
+        double similarity = analyzer.calculateSimilarity(m1, m2);
+
+        cout << "Similarity entre A et B : " << similarity << endl;
+
+        // Test unitaire simple : on s'attend à une similarité proche de 1
+        assert(similarity > 0.95 && similarity <= 1.0);
+        cout << "Test 1 passé avec succès." << endl;
     }
-   
-    AirQualityAnalyzer analyzer;
-    std::vector<Measurement> emptyMeasurements;
-    double avg = analyzer.computeAvarege("O3", emptyMeasurements);
-    std::cout << "Test computeAverage - Empty list: " << (avg == 0.0 ? "PASS" : "FAIL") << "\n";
+
+    return 0;
 }
