@@ -52,6 +52,6 @@ bool Cleaner::isActiveAt(time_t time) {
 
     return true; 
 }
-double Cleaner::estimatedImpact() {
+double Cleaner::estimatedImpact(Sensor sensor) {
     return 0.0; 
 }

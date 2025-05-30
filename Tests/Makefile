@@ -1,6 +1,6 @@
 # Makefile (à la racine du projet)
 CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -IInclude -w
+CXXFLAGS := -std=c++17  -IInclude -w
 
 # Répertoires de code
 SRC_DIRS := \
