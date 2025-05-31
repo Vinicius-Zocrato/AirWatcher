@@ -10,6 +10,11 @@ AirQualityAnalyzer::AirQualityAnalyzer(vector<Sensor> sensors){
     this->sensors = sensors;
 }
 
+AirQualityAnalyzer::AirQualityAnalyzer()
+{
+
+}
+
 bool inCircle(double xc, double yc, double xP, double yP, double r){
     double distance = std::hypot(xP - xc, yP - yc);
     return distance <= r;
@@ -90,32 +95,20 @@ void airQuality(double o3, double so2, double no2, double pm10) {
 
 }
 
-void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, float longitude, tm init, tm fin){
-
-    std::vector<Sensor> sensors_in_circle;
-
-    for(size_t i=0; i<sensors.size(); i++){
-        if(inCircle(longitude, latitude, sensors[i].getLongitude(), sensors[i].getLatitude(), radius)){
-            sensors_in_circle.push_back(sensors[i]);
-        }
-    }
-
+std::vector<double> calculateAirqualityMean(std::vector<Sensor> sensors, tm init, tm fin){
 
     double O3 = 0, SO2 = 0, NO2 = 0, PM10 = 0;
     int O3_n = 0, SO2_n = 0, NO2_n = 0, PM10_n = 0;
-    
-
-    std::vector<Measurement> measurements_in_period;
 
     static constexpr std::array<std::string_view,4> keys = {
         "O3", "SO2", "NO2", "PM10"
     };
 
-    for (size_t i = 0; i < sensors_in_circle.size(); i++)
+    for (size_t i = 0; i < sensors.size(); i++)
     {
-        for (size_t j = 0; j < sensors_in_circle[i].getMeasurements().size(); j++)
+        for (size_t j = 0; j < sensors[i].getMeasurements().size(); j++)
         {
-            Measurement measurement = sensors_in_circle[i].getMeasurements()[j];
+            Measurement measurement = sensors[i].getMeasurements()[j];
             if(inPeriod(init, fin, measurement.getTimeStamp())){
                 if (auto it = std::find(keys.begin(), keys.end(), measurement.getAttribute().getAttributeID()); it != keys.end()){
                     switch (distance(keys.begin(), it))
@@ -148,6 +141,26 @@ void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, floa
         }
     }
 
+    std::vector<double> means;
+    means.push_back(O3/O3_n);
+    means.push_back(SO2/SO2_n);
+    means.push_back(NO2/NO2_n);
+    means.push_back(PM10/PM10_n);
+    return means;
+}
+
+void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, float longitude, tm init, tm fin){
+
+    std::vector<Sensor> sensors_in_circle;
+
+    for(size_t i=0; i<sensors.size(); i++){
+        if(inCircle(longitude, latitude, sensors[i].getLongitude(), sensors[i].getLatitude(), radius)){
+            sensors_in_circle.push_back(sensors[i]);
+        }
+    }
+
+    std::vector<double> means = calculateAirqualityMean(sensors_in_circle, init, fin);
+    
     cout<<"utilized sensors"<<endl;
     for (size_t i = 0; i < sensors_in_circle.size(); i++)
     {
@@ -162,18 +175,14 @@ void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, floa
     cout<<"Air quality analisys results for latitude: "<<latitude
     <<", longitude: "<<longitude<<", time: "<<std::put_time(&init, "%Y-%m-%d %H:%M:%S")
     <<" to "<<std::put_time(&fin, "%Y-%m-%d %H:%M:%S")<<endl;
-    airQuality(O3/O3_n, SO2/SO2_n, NO2/NO2_n, PM10/PM10_n);
-
-}
-
-AirQualityAnalyzer::AirQualityAnalyzer()
-{
+    airQuality(means[0], means[1], means[2], means[3]);
 
 }
 
 double AirQualityAnalyzer::calculateSimilarity(const std::vector<Measurement>& m1,
     const std::vector<Measurement>& m2) {
     // TODO
+    
     return 0.0;
 }
 
@@ -218,9 +227,46 @@ double AirQualityAnalyzer::computeAverage() {
     return 0.0;
 }
 
-std::vector<Sensor> AirQualityAnalyzer::rankSensorByQuality() {
+void AirQualityAnalyzer::rankSensorByQuality(string attribute, tm init, tm fin) {
     // TODO
-    return {};
+
+    std::vector<double> sensorsMeans, aux;
+    static constexpr std::array<std::string_view,4> keys = {
+        "O3", "SO2", "NO2", "PM10"
+    };
+
+    auto it = std::find(keys.begin(), keys.end(), attribute);
+    int attrIndex = std::distance(keys.begin(), it);
+
+    for (size_t i = 0; i < sensors.size(); i++) {
+        aux = calculateAirqualityMean(std::vector<Sensor>{sensors[i]}, init, fin);
+
+        switch (attrIndex) {
+            case 0: // O3
+                sensorsMeans.push_back(aux[0]);
+                break;
+
+            case 1: // SO2
+                sensorsMeans.push_back(aux[1]);
+                break;
+
+            case 2: // NO2
+                sensorsMeans.push_back(aux[2]);
+                break;
+
+            case 3: // PM10
+                sensorsMeans.push_back(aux[3]);
+                break;
+
+            default:
+                std::cerr << "Índice fora do esperado: " << attrIndex << std::endl;
+                break;
+        }
+    }
+
+    cout<<"Sensors ranked by Qualitity, using attribute: "<<attribute
+    << ", time: "<<std::put_time(&init, "%Y-%m-%d %H:%M:%S")
+    <<" to "<<std::put_time(&fin, "%Y-%m-%d %H:%M:%S")<<endl;
 }
 
 Sensor AirQualityAnalyzer::findSensorById(string const capteurId) const

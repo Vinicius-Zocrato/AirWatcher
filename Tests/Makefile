@@ -6,7 +6,7 @@ CXXFLAGS := -std=c++17  -IInclude -w
 SRC_DIRS := \
     ../src/Domain \
     ../src/Infrastructure \
-    ../src/Presentation
+    #../src/Presentation
 
 # Fichiers que nous NE voulons PAS compiler
 EXCLUDE  := \

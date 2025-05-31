@@ -222,7 +222,7 @@ vector<User> CSVReader::loadUsers(const string &filename)
         {      
             if(SensorID[i] == sensors[j].getId()){
                 this->sensors[j].setUserID(UserID[i]);
-                this->users[i].inserAssociatedSensor(sensors[j]);
+                this->users[i].insertAssociatedSensor(sensors[j]);
             }
         }
     }

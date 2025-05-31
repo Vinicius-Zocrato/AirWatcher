@@ -61,14 +61,6 @@ void handleMaliciousUserDetection() {
     }
 }
 
-void measureRunTime(string algorithme) {
-    std::cout << "Measuring runtime for: " << algorithme << std::endl;
-    time_t start = time(nullptr);
-    callFunctionByName(algorithme);
-    time_t end = time(nullptr);
-    std::cout << "Durée d'exécution : " << (end - start) << " secondes." << std::endl;
-}
-
 void callFunctionByName(const std::string& functionName) {
     if (functionName == "detectMaliciousUsers") {
         auto users = reader.getUsers();
@@ -111,6 +103,14 @@ void callFunctionByName(const std::string& functionName) {
     else {
         cout << "Fonction inconnue : " << functionName << endl;
     }
+}
+
+void measureRunTime(string algorithme) {
+    std::cout << "Measuring runtime for: " << algorithme << std::endl;
+    time_t start = time(nullptr);
+    callFunctionByName(algorithme);
+    time_t end = time(nullptr);
+    std::cout << "Durée d'exécution : " << (end - start) << " secondes." << std::endl;
 }
 
 #endif // CONSOLEUI_H

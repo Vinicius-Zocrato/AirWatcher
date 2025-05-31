@@ -21,7 +21,7 @@ public:
     double calculateSimilarity(const std::vector<Measurement>& m1,const std::vector<Measurement>& m2); 
     vector<Sensor> findMostSimilarSensors(Sensor target, int topN); //not implemented yet
     double computeAverage();  
-    vector<Sensor> rankSensorByQuality();
+    void rankSensorByQuality(string attribute, tm init, tm fin);
     Sensor findSensorById(const string capteurId ) const;
 
 };

@@ -1,13 +1,13 @@
-#include "SensorValidator.h"
-#include "../Infrastructure/CSVReader.h"
+#include "../../Include/Domain/SensorValidator.h"
+#include "../../Include/Infrastructure/CSVReader.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
 #include <optional>
-#include "User.h"
-#include "Sensor.h"
-#include "Measurement.h"
+#include "../../Include/Domain/User.h"
+#include "../../Include/Domain/Sensor.h"
+#include "../../Include/Domain/Measurement.h"
 
 using namespace std;
 #ifndef M_PI
@@ -138,7 +138,7 @@ bool SensorValidator::isValidSensor( Sensor& sensor) {
 
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable( User& user) {
+bool SensorValidator::isUserReliable(User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
@@ -160,8 +160,6 @@ bool SensorValidator::isUserReliable( User& user) {
     else {
         return true; // L'utilisateur est fiable
     }
-
-
 }
 
 // Méthode : Détecte les utilisateurs malveillants
