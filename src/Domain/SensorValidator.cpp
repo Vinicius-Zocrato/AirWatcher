@@ -1,15 +1,16 @@
-#include "../../Include/Domain/SensorValidator.h"
-#include "../../Include/Infrastructure/CSVReader.h"
+#include "SensorValidator.h"
+#include "../Infrastructure/CSVReader.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
 #include <optional>
-#include "../../Include/Domain/User.h"
-#include "../../Include/Domain/Sensor.h"
-#include "../../Include/Domain/Measurement.h"
+#include "User.h"
+#include "Sensor.h"
+#include "Measurement.h"
 
 using namespace std;
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -138,29 +139,29 @@ bool SensorValidator::isValidSensor( Sensor& sensor) {
 
 
 // Méthode : Vérifie si un utilisateur est fiable (exemple simple basé sur flag)
-bool SensorValidator::isUserReliable(User& user) {
+bool SensorValidator::isUserReliable( User& user) {
     #ifdef MAP 
     cout << "SensorValidator::isUserReliable()" << endl;
     #endif
-    //Onn récupère les capteurs associés à l'utilisateur et on vérifie leur validité si false>3 ou 50% alors user non fiable
     vector<Sensor> sensors = user.getAssociatedSensors();
     int nbSensorsFalse = 0;
-    for ( int i = 0; i < sensors.size(); i++) {
+    if (sensors.empty()) return false;
+    for (int i = 0; i < sensors.size(); i++) {
         Sensor sensor = sensors[i];
         bool isValid = isValidSensor(sensor);
         if (!isValid) {
             nbSensorsFalse++;
         }
     }
-    // Si plus de 3 capteurs invalides ou plus de 50% des capteurs sont invalides, l'utilisateur est considéré comme non fiable
     if (nbSensorsFalse > 3 || (static_cast<float>(nbSensorsFalse) / sensors.size()) > 0.5) {
-        return false; // L'utilisateur n'est pas fiable
         user.setIsReliable(false);
-    }
-    else {
-        return true; // L'utilisateur est fiable
+        return false;
+    } else {
+        user.setIsReliable(true);
+        return true;
     }
 }
+
 
 // Méthode : Détecte les utilisateurs malveillants
 vector<User> SensorValidator::detectMaliciousUsers(const vector<User>& users) {
@@ -168,10 +169,9 @@ vector<User> SensorValidator::detectMaliciousUsers(const vector<User>& users) {
     cout << "SensorValidator::detectMaliciousUsers()" << endl;
     #endif
 
-
     maliciousUsers.clear();  // Réinitialiser
-    // Parcourir la liste des utilisateurs et vérifier leur fiabilité
-    for (const auto& user : users) {
+
+    for (auto& user : const_cast<vector<User>&>(users)) {
         if (!isUserReliable(user)) {
             maliciousUsers.push_back(user);
         }
