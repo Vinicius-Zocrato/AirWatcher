@@ -305,9 +305,6 @@ std::vector<Cleaner> CSVReader::loadCleaners(const string &filename)
     std::vector<std::tm> timeStampStart;
     std::vector<std::tm> timeStampStop;
 
-    std::tm tm_start = {};
-    std::tm tm_stop = {};
-
     std::string linha;
     while (std::getline(file, linha))
     {

@@ -141,6 +141,11 @@ std::vector<double> calculateAirqualityMean(std::vector<Sensor> sensors, tm init
         }
     }
 
+    if (O3_n == 0 && SO2_n == 0 && NO2_n == 0 && PM10_n == 0) {
+        std::cout << "[AVERTISSEMENT] Aucune mesure trouvée dans l'intervalle de temps spécifié.\n";
+        return {};
+    }
+
     std::vector<double> means;
     means.push_back(O3/O3_n);
     means.push_back(SO2/SO2_n);
@@ -175,6 +180,11 @@ std::vector<double> calculateAirqualitySensor(Sensor& sensor, tm init, tm fin) {
         }
     }
 
+    if (O3_n == 0 && SO2_n == 0 && NO2_n == 0 && PM10_n == 0) {
+        std::cout << "[AVERTISSEMENT] Aucune mesure trouvée dans l'intervalle de temps spécifié.\n";
+        return {};
+    }
+
     return {
         O3_n ? O3 / O3_n : 0.0,
         SO2_n ? SO2 / SO2_n : 0.0,
@@ -191,6 +201,11 @@ void AirQualityAnalyzer::calculateAirQuality(double radius, float latitude, floa
         if(inCircle(longitude, latitude, sensors[i].getLongitude(), sensors[i].getLatitude(), radius)){
             sensors_in_circle.push_back(sensors[i]);
         }
+    }
+
+    if (sensors_in_circle.empty()) {
+        std::cout << "[AVERTISSEMENT] Aucun capteur trouvé dans la zone spécifiée.\n";
+        return;
     }
 
     std::vector<double> means = calculateAirqualityMean(sensors_in_circle, init, fin);

@@ -17,7 +17,7 @@ public:
     bool isActiveAt(time_t time);
     double estimatedImpact(Sensor sensor); 
 
-    string getCleanerID();
+    string getCleanerID() const;
     float getLatitude();
     float getLongitude();
     tm getTimeStampStart();

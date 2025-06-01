@@ -18,6 +18,7 @@ static SensorValidator validator;
 void loadData() {
     reader.loadData();
     dataLoaded = true;
+    analyzer = AirQualityAnalyzer(reader.getSensors());
     cout << "[INFO] Données chargées avec succès.\n";
 }
 
@@ -55,6 +56,7 @@ void handleAirQualityRequest() {
     cout << "Date fin (YYYY MM DD HH mm ss) : "; cin >> y2 >> m2 >> d2 >> h2 >> min2 >> s2;
     tm t1 = {}; t1.tm_year = y1-1900; t1.tm_mon = m1-1; t1.tm_mday = d1; t1.tm_hour = h1; t1.tm_min = min1; t1.tm_sec = s1;
     tm t2 = {}; t2.tm_year = y2-1900; t2.tm_mon = m2-1; t2.tm_mday = d2; t2.tm_hour = h2; t2.tm_min = min2; t2.tm_sec = s2;
+
     analyzer.calculateAirQuality(radius, latitude, longitude, t1, t2);
 }
 
@@ -94,14 +96,69 @@ void handleAirQualityAtPositionRequest() {
     cout << "Longitude : "; cin >> longitude;
     cout << "Date (YYYY MM DD HH mm ss) : "; cin >> y >> m >> d >> h >> min >> s;
     tm t = {}; t.tm_year = y-1900; t.tm_mon = m-1; t.tm_mday = d; t.tm_hour = h; t.tm_min = min; t.tm_sec = s;
-    cout << "[TODO] Calcul de la qualité de l'air à la position donnée non implémenté.\n";
+
+    std::tm fin = t;   
+    std::tm init = t;           
+
+    time_t timeFin  = mktime(&fin);
+    time_t timeInit = timeFin - 24 * 3600;  
+
+    init = *localtime(&timeInit);
+
+    mktime(&fin); 
+
+    analyzer.calculateAirQuality(0.3, latitude, longitude, init, fin);
 }
 
 void handleProviderImpactRequest() {
     if (!dataLoaded) { cout << "[ERREUR] Chargez les données d'abord.\n"; return; }
     string cleanerId;
     cout << "ID du produit (cleaner) : "; cin >> cleanerId;
-    cout << "[TODO] Vérification de l'impact du produit non implémentée.\n";
+
+    Cleaner cleaner;
+
+    for (size_t i = 0; i < reader.getCleaners().size(); i++)
+    {
+        if(reader.getCleaners()[i].getCleanerID() == cleanerId){
+            cleaner = reader.getCleaners()[i];
+            break;
+        }
+    }
+
+    if(cleaner.getCleanerID() == ""){
+        cout << "Cleaner non trouvé.\n";
+        return;
+    }
+
+    cleaner.toString();
+    
+    const time_t ONE_DAY = 60 * 60 * 24;
+
+
+    tm start = cleaner.getTimeStampStart();
+    tm stop  = cleaner.getTimeStampStop();
+
+    time_t t_start = mktime(&start);
+    time_t t_stop  = mktime(&stop);
+
+
+    time_t before_start = t_start - ONE_DAY;
+    tm start_before = *localtime(&before_start);
+    tm stop_before  = start;
+
+    cout << "Qualité de l'air dans un rayon de 0.5Km AVANT l'activation du Cleaner: " << cleanerId << endl;
+    analyzer.calculateAirQuality(0.5, cleaner.getLatitude(), cleaner.getLongitude(), start_before, stop_before);
+
+
+    time_t midpoint = t_start + (t_stop - t_start) / 2;  
+    time_t after_mid = midpoint + ONE_DAY;
+
+    tm during_start = *localtime(&midpoint);
+    tm during_end   = *localtime(&after_mid);
+
+    cout << "Qualité de l'air dans un rayon de 0.5Km PENDANT l'activation du Cleaner: " << cleanerId << endl;
+    analyzer.calculateAirQuality(0.5, cleaner.getLatitude(), cleaner.getLongitude(), during_start, during_end);
+
 }
 
 void handleUserScoreRequest() {
@@ -131,7 +188,15 @@ void handleMalfunctioningSensorsRequest() {
 
 void handleSimilarAreasRequest() {
     if (!dataLoaded) { cout << "[ERREUR] Chargez les données d'abord.\n"; return; }
-    cout << "[TODO] Identification des zones à qualité similaire non implémentée.\n";
+    string sensorID;
+    int y1, m1, d1, h1, min1, s1, y2, m2, d2, h2, min2, s2;
+    cout << "SensorID for comparation: "; cin >> sensorID;
+    cout << "Date début reference (YYYY MM DD HH mm ss) : "; cin >> y1 >> m1 >> d1 >> h1 >> min1 >> s1;
+    cout << "Date fin reference(YYYY MM DD HH mm ss) : "; cin >> y2 >> m2 >> d2 >> h2 >> min2 >> s2;
+    tm t1 = {}; t1.tm_year = y1-1900; t1.tm_mon = m1-1; t1.tm_mday = d1; t1.tm_hour = h1; t1.tm_min = min1; t1.tm_sec = s1;
+    tm t2 = {}; t2.tm_year = y2-1900; t2.tm_mon = m2-1; t2.tm_mday = d2; t2.tm_hour = h2; t2.tm_min = min2; t2.tm_sec = s2;
+
+    analyzer.findMostSimilarSensors(analyzer.findSensorById(sensorID), t1, t2);
 }
 
 void handleAlgorithmEfficiencyRequest() {
