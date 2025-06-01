@@ -10,7 +10,7 @@ CXX = g++
 CXXFLAGS = -ansi -pedantic -Wall -std=c++11  -I$(INCLUDE_DIR)
 
 #nom de l'executable
-TARGET = main
+TARGET = AirWatcher
 
 #dossier contenant les .cpp
 SRC_DIR = src
