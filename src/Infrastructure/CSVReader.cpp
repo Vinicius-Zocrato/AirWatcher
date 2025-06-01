@@ -83,13 +83,13 @@ vector<Sensor> CSVReader::loadSensors(const string &filename)
         }
     }
 
-    for (int i = 0; i < SensorID.size(); i++)
+    for (size_t i = 0; i < SensorID.size(); i++)
     {   
         this->sensors.push_back(Sensor(SensorID[i], latitude[i], longitude[i], ""));
     }
 
-    for (int i=0; i<measurements.size(); i++){
-        for(int j=0; j<sensors.size(); j++){
+    for (size_t i=0; i<measurements.size(); i++){
+        for(size_t j=0; j<sensors.size(); j++){
             if(measurements[i].getSensorID ()== sensors[j].getId()){
                 sensors[j].addMeasurement(measurements[i]);
             }
@@ -160,9 +160,9 @@ vector<Measurement> CSVReader::loadMeasurements(const string &filename)
         }
     }
 
-    for (int i = 0; i < value.size(); i++)
+    for (size_t i = 0; i < value.size(); i++)
     {   
-        for (int j = 0; j < attributes.size(); j++)
+        for (size_t j = 0; j < attributes.size(); j++)
         {   
             if(attribute[i] == attributes[j].getAttributeID()){
                 this->measurements.push_back(Measurement(timestamp[i], this->attributes[j], value[i], sensorID[i]));
@@ -215,10 +215,10 @@ vector<User> CSVReader::loadUsers(const string &filename)
         }
     }
 
-    for (int i = 0; i < UserID.size(); i++)
+    for (size_t i = 0; i < UserID.size(); i++)
     {   
         this->users.push_back(User(UserID[i]));
-        for (int j = 0; j < sensors.size(); j++)
+        for (size_t j = 0; j < sensors.size(); j++)
         {      
             if(SensorID[i] == sensors[j].getId()){
                 this->sensors[j].setUserID(UserID[i]);
@@ -275,10 +275,10 @@ vector<Provider> CSVReader::loadProviders(const string &filename)
         }
     }
 
-    for (int i = 0; i < ProviderID.size(); i++)
+    for (size_t i = 0; i < ProviderID.size(); i++)
     {   
         this->providers.push_back(Provider(ProviderID[i]));
-        for (int j = 0; j < cleaners.size(); j++)
+        for (size_t j = 0; j < cleaners.size(); j++)
         {      
             if(CleanerID[i] == cleaners[j].getCleanerID()){
                 this->providers[i].addCleaner(cleaners[j]);

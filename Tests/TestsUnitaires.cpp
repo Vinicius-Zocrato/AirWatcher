@@ -314,6 +314,69 @@ bool test28(){
     return true;
 }
 
+bool test29(){
+    cout<<"Runing Tests 29\n";
+    CSVReader reader;
+    reader.loadData();  
+
+    AirQualityAnalyzer airQualityAnalyzer(reader.getSensors());
+
+    std::tm init = {};
+    init.tm_year = 2019 - 1900;  
+    init.tm_mon  = 0;            
+    init.tm_mday = 1;            
+    init.tm_hour = 12;
+    init.tm_min  = 0;
+    init.tm_sec  = 0;
+
+
+    std::tm fin = {};
+    fin.tm_year = 2019 - 1900;   
+    fin.tm_mon  = 0;             
+    fin.tm_mday = 1;             
+    fin.tm_hour = 15;
+    fin.tm_min  = 0;
+    fin.tm_sec  = 0;
+
+    std::time_t t_init = std::mktime(&init);
+    std::time_t t_fin  = std::mktime(&fin);
+
+    airQualityAnalyzer.rankSensorByQuality("SO2", init, fin);
+
+    return true;
+}
+
+bool test30(){
+    cout<<"Runing Tests 30\n";
+    CSVReader reader;
+    reader.loadData();  
+
+    AirQualityAnalyzer airQualityAnalyzer(reader.getSensors());
+
+    std::tm init = {};
+    init.tm_year = 2019 - 1900;  
+    init.tm_mon  = 0;            
+    init.tm_mday = 1;            
+    init.tm_hour = 12;
+    init.tm_min  = 0;
+    init.tm_sec  = 0;
+
+
+    std::tm fin = {};
+    fin.tm_year = 2019 - 1900;   
+    fin.tm_mon  = 0;             
+    fin.tm_mday = 1;             
+    fin.tm_hour = 15;
+    fin.tm_min  = 0;
+    fin.tm_sec  = 0;
+
+    std::time_t t_init = std::mktime(&init);
+    std::time_t t_fin  = std::mktime(&fin);
+
+    airQualityAnalyzer.findMostSimilarSensors(airQualityAnalyzer.getSensors()[0], init, fin);
+
+    return true;
+}
 
 
 int main() {
@@ -328,7 +391,11 @@ int main() {
     //Test11(); Test12(); Test13(); Test14(); Test15();
     //Test16(); Test17(); Test18(); Test19(); Test20();
 
-    test28();
+    //test28();
+
+    //test29();
+
+    test30();
 
     return 0;
 }
