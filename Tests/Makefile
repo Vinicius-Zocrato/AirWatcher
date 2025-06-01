@@ -3,8 +3,11 @@
 CXX      := g++
 CXXFLAGS := -std=c++17 -IInclude -w
 
-# Fichier source du test
-TEST_SRC := CSVReaderTest.cpp
+# Répertoires de code
+SRC_DIRS := \
+    ../src/Domain \
+    ../src/Infrastructure \
+    #../src/Presentation
 
 # Dépendances de CSVReader
 DEPS := \

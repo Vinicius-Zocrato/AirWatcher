@@ -16,13 +16,13 @@ public:
     ~User();
 
     void updateScore(double score);
-    void changeRealisable();
+    void setIsReliable(bool reliability);
     
     bool getIsReliable() const;
     string getUserId() const;
     int getScore() const;
     vector<Sensor> getAssociatedSensors() const;
-    void inserAssociatedSensor(Sensor sensor);
+    void insertAssociatedSensor(const Sensor& sensor);
 
     void toString() const;
 

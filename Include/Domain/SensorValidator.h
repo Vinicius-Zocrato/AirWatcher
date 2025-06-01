@@ -11,7 +11,7 @@ class SensorValidator {
 private: 
     vector <User> maliciousUsers;
     bool isValidSensor(const Sensor& sensor);
-    bool isUserReliable(const User& user);
+    bool isUserReliable(const User& user); 
 public:
     SensorValidator();
 
