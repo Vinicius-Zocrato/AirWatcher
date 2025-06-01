@@ -60,19 +60,18 @@ void handleAirQualityRequest() {
 void handleSensorSimilarityRequest() {
     if (!dataLoaded) { cout << "[ERREUR] Chargez les données d'abord.\n"; return; }
     string targetId;
+    int y1, m1, d1, h1, min1, s1, y2, m2, d2, h2, min2, s2;
     cout << "ID du capteur de référence : "; cin >> targetId;
-    auto sensors = reader.getSensors();
-    auto it = std::find_if(sensors.begin(), sensors.end(), [&](const Sensor& s){ return s.getId() == targetId; });
-    if (it == sensors.end()) {
+    cout << "Date début reference (YYYY MM DD HH mm ss) : "; cin >> y1 >> m1 >> d1 >> h1 >> min1 >> s1;
+    cout << "Date fin reference(YYYY MM DD HH mm ss) : "; cin >> y2 >> m2 >> d2 >> h2 >> min2 >> s2;
+    tm t1 = {}; t1.tm_year = y1-1900; t1.tm_mon = m1-1; t1.tm_mday = d1; t1.tm_hour = h1; t1.tm_min = min1; t1.tm_sec = s1;
+    tm t2 = {}; t2.tm_year = y2-1900; t2.tm_mon = m2-1; t2.tm_mday = d2; t2.tm_hour = h2; t2.tm_min = min2; t2.tm_sec = s2;
+    Sensor it = analyzer.findSensorById(targetId);
+    if (it.getId() == "") {
         cout << "Capteur non trouvé.\n";
         return;
     }
-    Sensor target = *it;
-    vector<Sensor> others;
-    for (const auto& s : sensors) if (s.getId() != targetId) others.push_back(s);
-    // Vérifie si la fonction existe
-    // auto similars = analyzer.findMostSimilarSensors(target, others); // NON implémentée
-    cout << "[TODO] Fonction findMostSimilarSensors non implémentée.\n";
+    analyzer.findMostSimilarSensors(it, t1, t2);
 }
 
 void handleMaliciousUserDetection() {

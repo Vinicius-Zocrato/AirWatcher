@@ -320,6 +320,8 @@ Sensor AirQualityAnalyzer::findSensorById(string const capteurId) const
             return sensors[i];
         }
     }
+    
+    return Sensor();
 }
 
 vector<Sensor> AirQualityAnalyzer::getSensors() const{

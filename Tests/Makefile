@@ -1,7 +1,6 @@
-# Makefile pour compiler CSVReaderTest avec toutes ses dépendances
-
+# Makefile (à la racine du projet)
 CXX      := g++
-CXXFLAGS := -std=c++17 -IInclude -w
+CXXFLAGS := -std=c++17 -Wall -IInclude -w
 
 # Répertoires de code
 SRC_DIRS := \
@@ -9,31 +8,31 @@ SRC_DIRS := \
     ../src/Infrastructure \
     #../src/Presentation
 
-# Dépendances de CSVReader
-DEPS := \
-    ../src/Infrastructure/CSVReader.cpp \
-    ../src/Domain/Sensor.cpp \
-    ../src/Domain/User.cpp \
-    ../src/Domain/Measurement.cpp \
-    ../src/Domain/Attribute.cpp \
-    ../src/Domain/Cleaner.cpp \
-    ../src/Domain/Provider.cpp
+# Fichiers que nous NE voulons PAS compiler
+EXCLUDE  := \
+    ../src/Domain/SensorValidator.cpp
 
-# Objets à compiler
-OBJS := $(TEST_SRC:.cpp=.o) $(DEPS:.cpp=.o)
+# Recherche tous les .cpp, puis supprime ceux qui sont dans EXCLUDE
+ALL_SRCS := $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.cpp))
+SRCS     := $(filter-out $(EXCLUDE),$(ALL_SRCS)) TestsUnitaires.cpp
 
-# Nom de l'exécutable
-TARGET := csv_reader_test
+# Convertit la liste de .cpp en liste de .o
+OBJS     := $(SRCS:.cpp=.o)
+
+# Exécutable de tests
+TARGET   := run_tests
 
 .PHONY: all clean
 
 all: $(TARGET)
 
+# Lie tous les .o dans l'exécutable
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+# Règle générique pour compiler .cpp en .o
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	del /Q "..\\src\\Domain\\Attribute.o" "..\\src\\Domain\\AirQualityAnalyzer.o" "..\\src\\Domain\\Measurement.o" "..\\src\\Domain\\Sensor.o" "..\\src\\Domain\\User.o" "..\\src\\Domain\\Cleaner.o" "..\\src\\Domain\\Provider.o" "..\\src\\Infrastructure\\CSVReader.o" "..\\src\\Presentation\\ConsoleUI.o" "..\\Tests\\TestsUnitaires.o" "run_tests.exe"
