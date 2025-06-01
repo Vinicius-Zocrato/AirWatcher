@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <algorithm>
 #include "../../Include/Infrastructure/CSVReader.h"
 #include "../../Include/Domain/AirQualityAnalyzer.h"
 #include "../../Include/Domain/SensorValidator.h"

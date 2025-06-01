@@ -1,58 +1,41 @@
-#makeFile
-#todolist : verifier si les dir existent et sinon les créer et 
+# Compilador e flags
+CXX := g++
+CXXFLAGS := -std=c++17 -Wall -IInclude
 
-#Variable:
+# Arquivos-fonte explicitamente listados
+SRCS := \
+	src/Application/Main.cpp \
+	src/Domain/Attribute.cpp \
+	src/Domain/Measurement.cpp \
+	src/Domain/Sensor.cpp \
+	src/Domain/User.cpp \
+	src/Domain/Cleaner.cpp \
+	src/Domain/Provider.cpp \
+	src/Domain/SensorValidator.cpp \
+	src/Domain/AirQualityAnalyzer.cpp \
+	src/Infrastructure/CSVReader.cpp \
+	src/Presentation/ConsoleUI.cpp
 
-#compilateur
-CXX = g++
+# Gera os .o correspondentes
+OBJS := $(SRCS:.cpp=.o)
 
-#Option de compilation
-CXXFLAGS = -ansi -pedantic -Wall -std=c++11  -I$(INCLUDE_DIR)
+# Executável final
+TARGET := main.exe
 
-#nom de l'executable
-TARGET = main
-
-#dossier contenant les .cpp
-SRC_DIR = src
-
-#dossier contenant les .h
-INCLUDE_DIR = Include
-
-#sous dossier
-INCLUDE_DIRS := $(shell find $(INCLUDE_DIR) -type d)
-CXXFLAGS += $(addprefix -I, $(INCLUDE_DIRS))
-
-#dossier pour les .o 
-OBJ_DIR = out
-
-#liste des fichiers dans SRC_DIR
-SOURCES = $(shell find $(SRC_DIR) -name "*.cpp")
-
-#liste des fichiers dans INCLUDE_DIR 
-HEADERS = $(shell find $(INCLUDE_DIR) -name "*.h")
-
-#liste des fichiers dans OBJ_DIR
-OBJECTS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(subst $(SRC_DIR)/,,$(SOURCES)))
-
-#règle pour construire l'exécutable
-$(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $@
-
-#régple pour compiler de cpp à .o
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-#regle executé lorsque qu'on appelle le makefile  
+# Regra principal
 all: $(TARGET)
 
-#nettoie le fichier executable et les .o
+# Linkagem
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# Compilação de .cpp → .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Limpeza
 clean:
-	rm -f $(TARGET)
-	rm -rf $(OBJ_DIR)
+	del /Q $(subst /,\,$(wildcard src/**/*.o)) main.exe 2> NUL
 
 
-
-
-
-.PHONY: clean all
+.PHONY: all clean

@@ -1,13 +1,13 @@
-#include "SensorValidator.h"
-#include "../Infrastructure/CSVReader.h"
+#include "../../Include/Domain/SensorValidator.h"
+#include "../../Include/Infrastructure/CSVReader.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
 #include <optional>
-#include "User.h"
-#include "Sensor.h"
-#include "Measurement.h"
+#include "../../Include/Domain/User.h"
+#include "../../Include/Domain/Sensor.h"
+#include "../../Include/Domain/Measurement.h"
 
 using namespace std;
 

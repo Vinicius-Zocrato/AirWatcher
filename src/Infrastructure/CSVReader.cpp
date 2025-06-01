@@ -23,12 +23,12 @@ bool parseDateTime(const std::string &s, std::tm &out_tm)
 }
 
 void CSVReader::loadData(){
-    loadAttributes("../Data/attributes.csv");
-    loadCleaners("../Data/cleaners.csv");
-    loadMeasurements("../Data/measurements.csv");
-    loadProviders("../Data/providers.csv");
-    loadSensors("../Data/sensors.csv");
-    loadUsers("../Data/users.csv");
+    loadAttributes("./Data/attributes.csv");
+    loadCleaners("./Data/cleaners.csv");
+    loadMeasurements("./Data/measurements.csv");
+    loadProviders("./Data/providers.csv");
+    loadSensors("./Data/sensors.csv");
+    loadUsers("./Data/users.csv");
 }
 
 
