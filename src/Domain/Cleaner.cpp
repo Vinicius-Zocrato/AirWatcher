@@ -17,7 +17,7 @@ Cleaner::Cleaner(string CleanerId, float Latitude, float Longitude, tm TimeStamp
 Cleaner::~Cleaner() {
 }
 
-string Cleaner::getCleanerID(){
+string Cleaner::getCleanerID() const{
     return this->CleanerId;
 }
 float Cleaner::getLatitude(){

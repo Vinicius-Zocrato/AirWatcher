@@ -23,12 +23,12 @@ bool parseDateTime(const std::string &s, std::tm &out_tm)
 }
 
 void CSVReader::loadData(){
-    loadAttributes("../Data/attributes.csv");
-    loadCleaners("../Data/cleaners.csv");
-    loadMeasurements("../Data/measurements.csv");
-    loadProviders("../Data/providers.csv");
-    loadSensors("../Data/sensors.csv");
-    loadUsers("../Data/users.csv");
+    loadAttributes("./Data/attributes.csv");
+    loadCleaners("./Data/cleaners.csv");
+    loadMeasurements("./Data/measurements.csv");
+    loadProviders("./Data/providers.csv");
+    loadSensors("./Data/sensors.csv");
+    loadUsers("./Data/users.csv");
 }
 
 
@@ -304,9 +304,6 @@ std::vector<Cleaner> CSVReader::loadCleaners(const string &filename)
     std::vector<float> longitude;
     std::vector<std::tm> timeStampStart;
     std::vector<std::tm> timeStampStop;
-
-    std::tm tm_start = {};
-    std::tm tm_stop = {};
 
     std::string linha;
     while (std::getline(file, linha))

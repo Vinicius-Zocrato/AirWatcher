@@ -1,13 +1,13 @@
-#include "SensorValidator.h"
-#include "../Infrastructure/CSVReader.h"
+#include "../../Include/Domain/SensorValidator.h"
+#include "../../Include/Infrastructure/CSVReader.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <numeric>
 #include <optional>
-#include "User.h"
-#include "Sensor.h"
-#include "Measurement.h"
+#include "../../Include/Domain/User.h"
+#include "../../Include/Domain/Sensor.h"
+#include "../../Include/Domain/Measurement.h"
 
 using namespace std;
 
@@ -146,7 +146,7 @@ bool SensorValidator::isUserReliable( User& user) {
     vector<Sensor> sensors = user.getAssociatedSensors();
     int nbSensorsFalse = 0;
     if (sensors.empty()) return false;
-    for (int i = 0; i < sensors.size(); i++) {
+    for (size_t i = 0; i < sensors.size(); i++) {
         Sensor sensor = sensors[i];
         bool isValid = isValidSensor(sensor);
         if (!isValid) {
