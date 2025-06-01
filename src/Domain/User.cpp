@@ -25,9 +25,9 @@ vector<Sensor> User::getAssociatedSensors() const {
     return associatedSensors;
 }
 
-// void  User::insertSensor(const Sensor& sensor){
-//     this->associatedSensors.push_back(sensor);
-// }
+void  User::insertSensor(const Sensor& sensor){
+    this->associatedSensors.push_back(sensor);
+}
 
 void User::updateScore(double delta = 1.0) {
     score += static_cast<int>(delta);
@@ -36,9 +36,9 @@ void User::updateScore(double delta = 1.0) {
     }
 }
 
-// void User::setIsReliable(bool reliability) {
-//     isReliable = reliability;
-// }
+void User::setIsReliable(bool reliability) {
+    isReliable = reliability;
+}
 
 bool User::getIsReliable() const {
     return isReliable;
