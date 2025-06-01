@@ -66,6 +66,9 @@
         "xloctime": "cpp",
         "xtree": "cpp",
         "xhash": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "ratio": "cpp"
     }
 }

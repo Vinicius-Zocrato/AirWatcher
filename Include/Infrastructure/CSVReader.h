@@ -38,6 +38,8 @@ private:
     vector<Provider> providers;
     vector<Cleaner> cleaners;
     vector<Attribute> attributes;
+    std::string basePath;
+
 };
 
 #endif // CSVREADE

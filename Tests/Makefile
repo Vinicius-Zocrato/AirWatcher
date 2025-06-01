@@ -35,4 +35,8 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	del /Q "..\\src\\Domain\\Attribute.o" "..\\src\\Domain\\AirQualityAnalyzer.o" "..\\src\\Domain\\Measurement.o" "..\\src\\Domain\\Sensor.o" "..\\src\\Domain\\User.o" "..\\src\\Domain\\Cleaner.o" "..\\src\\Domain\\Provider.o" "..\\src\\Infrastructure\\CSVReader.o" "..\\src\\Presentation\\ConsoleUI.o" "..\\Tests\\TestsUnitaires.o" "run_tests.exe"
+	clean:
+	rm -f src/Application/Main.o src/Domain/AirQualityAnalyzer.o src/Domain/Attribute.o src/Domain/Cleaner.o \
+	src/Domain/Measurement.o src/Domain/Provider.o src/Domain/Sensor.o src/Domain/SensorValidator.o \
+	src/Domain/User.o src/Infrastructure/CSVReader.o src/Presentation/ConsoleUI.o main.exe
+
