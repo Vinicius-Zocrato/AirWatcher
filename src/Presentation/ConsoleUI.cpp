@@ -135,9 +135,30 @@ void handleSimilarAreasRequest() {
 }
 
 void handleAlgorithmEfficiencyRequest() {
-    string algo;
-    cout << "Nom de l'algorithme à mesurer : "; cin >> algo;
-    measureRunTime(algo);
+    cout << "Quel algorithme voulez-vous mesurer ?\n";
+    cout << "1. Calculer la qualité de l'air dans une zone\n";
+    cout << "2. Calculer la qualité de l'air à une position\n";
+    cout << "3. Classer les capteurs par similarité\n";
+    cout << "4. Vérifier l'impact d'un produit fournisseur\n";
+    cout << "5. Vérifier le score d'un utilisateur\n";
+    cout << "6. Vérifier les capteurs défaillants\n";
+    cout << "7. Identifier les zones à qualité similaire\n";
+    cout << "Votre choix : ";
+    int algo = 0;
+    cin >> algo;
+    time_t start = time(nullptr);
+    switch (algo) {
+        case 1: handleAirQualityRequest(); break;
+        case 2: handleAirQualityAtPositionRequest(); break;
+        case 3: handleSensorSimilarityRequest(); break;
+        case 4: handleProviderImpactRequest(); break;
+        case 5: handleUserScoreRequest(); break;
+        case 6: handleMalfunctioningSensorsRequest(); break;
+        case 7: handleSimilarAreasRequest(); break;
+        default: cout << "Choix invalide.\n"; break;
+    }
+    time_t end = time(nullptr);
+    cout << "Durée d'exécution : " << (end - start) << " secondes." << endl;
 }
 
 // Fonctions manquantes à implémenter (résumé) :
