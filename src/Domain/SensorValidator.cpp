@@ -8,15 +8,32 @@
 #include "../../Include/Domain/User.h"
 #include "../../Include/Domain/Sensor.h"
 #include "../../Include/Domain/Measurement.h"
+#include <unistd.h>
+#include <limits.h>
+#include <filesystem>
 
 using namespace std;
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+std::string getExecutable() {
+    char result[PATH_MAX];
+    ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+    if (count == -1) {
+        std::cerr << "Erreur pour localiser l'exécutable" << std::endl;
+        exit(1);
+    }
+    std::string exePath(result, count);
+    return std::filesystem::path(exePath).parent_path().string();
+}
 
 // Constructeur
-SensorValidator::SensorValidator() {}
+SensorValidator::SensorValidator() {
+    CSVReader reader;
+    reader.loadSensors(getExecutable() + "/Data/""sensors.csv");
+    
+}
 
 // Getters
 // bool SensorValidator::SetIsValidSensor( Sensor& sensor)  {
@@ -78,8 +95,8 @@ bool SensorValidator::isValidSensor( Sensor& sensor) {
     #ifdef MAP 
     cout << "SensorValidator::isValidSensor()" << endl;
     #endif
-    CSVReader reader;
-    reader.loadSensors("../Data/sensors.csv"); // charge sensors et measurements
+    // CSVReader reader;
+    // reader.loadSensors("Data/sensors.csv"); // charge sensors et measurements
 
     // Récupere la dernière mesure du capteur
     Measurement mesureRecent = sensor.getMeasurements()[0];

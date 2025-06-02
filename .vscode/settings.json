@@ -69,6 +69,7 @@
         "list": "cpp",
         "chrono": "cpp",
         "codecvt": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "filesystem": "cpp"
     }
 }

@@ -1,0 +1,38 @@
+[INFO] Données chargées avec succès.
+Bienvenue dans AirWatcher !
+Êtes-vous :
+1. Admin
+2. User
+3. Provider
+Votre choix : 
+--- Menu Fournisseur ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Vérifier l'impact d'un de vos produits
+4. Identifier les zones à qualité similaire
+0. Quitter
+Votre choix : ID du produit (cleaner) : Cleaner ID: Cleaner0, Latitude: 45.3333, Longitude: 1.33333, Start: 2019-02-01 12:00:00, Stop: 2019-03-01 00:00:00
+Qualité de l'air dans un rayon de 0.5Km AVANT l'activation du Cleaner: Cleaner0
+utilized sensors
+Sensor33 Sensor34 Sensor43 
+Air quality analisys results for latitude: 45.3333, longitude: 1.33333, time: 2019-01-31 12:00:00 to 2019-02-01 12:00:00
+O3 indice: 49.46 - Niveau: Tres bon
+SO2 indice: 41.025 - Niveau: Tres bon
+NO2 indice: 46.1617 - Niveau: Tres bon
+PM10 indice: 60.95 - Niveau: Mauvais
+Qualité de l'air dans un rayon de 0.5Km PENDANT l'activation du Cleaner: Cleaner0
+utilized sensors
+Sensor33 Sensor34 Sensor43 
+Air quality analisys results for latitude: 45.3333, longitude: 1.33333, time: 2019-02-15 06:00:00 to 2019-02-16 06:00:00
+O3 indice: 48.3367 - Niveau: Tres bon
+SO2 indice: 42.3633 - Niveau: Tres bon
+NO2 indice: 47.7633 - Niveau: Tres bon
+PM10 indice: 61.57 - Niveau: Mauvais
+
+--- Menu Fournisseur ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Vérifier l'impact d'un de vos produits
+4. Identifier les zones à qualité similaire
+0. Quitter
+Votre choix : Merci d'avoir utilisé AirWatcher !

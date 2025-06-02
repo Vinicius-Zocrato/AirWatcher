@@ -4,12 +4,14 @@
 #include <string>
 #include <vector>
 #include "User.h"
+#include "../Infrastructure/CSVReader.h"
 
 using namespace std;
 
 class SensorValidator {
 private: 
     vector <User> maliciousUsers;
+    CSVReader reader;
     
 public:
 

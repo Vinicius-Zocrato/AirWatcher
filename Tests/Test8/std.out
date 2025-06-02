@@ -15,4 +15,16 @@ Votre choix :
 7. Identifier les zones à qualité similaire
 8. Mesurer l'efficacité d'un algorithme
 0. Quitter
+Votre choix : Votre ID utilisateur : Votre score : 0
+
+--- Menu Admin ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Classer les capteurs par similarité
+4. Vérifier l'impact d'un produit fournisseur
+5. Vérifier le score d'un utilisateur
+6. Vérifier les capteurs défaillants
+7. Identifier les zones à qualité similaire
+8. Mesurer l'efficacité d'un algorithme
+0. Quitter
 Votre choix : Merci d'avoir utilisé AirWatcher !

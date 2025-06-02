@@ -20,9 +20,11 @@ std::string getExecutableDir() {
     return std::filesystem::path(exePath).parent_path().string();
 }
 
+    
+
 CSVReader::CSVReader() {
     basePath = getExecutableDir() + "/Data/";
-    std::cout << "CSVReader constructor called, using basePath: " << basePath << std::endl;
+    // std::cout << "CSVReader constructor called, using basePath: " << basePath << std::endl;
 }
 
 CSVReader::~CSVReader() {}

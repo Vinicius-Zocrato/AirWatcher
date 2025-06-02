@@ -1,0 +1,70 @@
+[INFO] Données chargées avec succès.
+Bienvenue dans AirWatcher !
+Êtes-vous :
+1. Admin
+2. User
+3. Provider
+Votre choix : 
+--- Menu Admin ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Classer les capteurs par similarité
+4. Vérifier l'impact d'un produit fournisseur
+5. Vérifier le score d'un utilisateur
+6. Vérifier les capteurs défaillants
+7. Identifier les zones à qualité similaire
+8. Mesurer l'efficacité d'un algorithme
+0. Quitter
+Votre choix : SensorID for comparation: Date début reference (YYYY MM DD HH mm ss) : Date fin reference(YYYY MM DD HH mm ss) : Sensors most similars with the Sensor: Sensor0, time: 2019-01-01 12:00:00 to 2019-04-01 00:00:00
+O3 indice: 48.25 - Niveau: Tres bon
+SO2 indice: 40.5972 - Niveau: Tres bon
+NO2 indice: 74.475 - Niveau: Bon
+PM10 indice: 46.9056 - Niveau: Mediocre
+------------------
+1. Sensor ID: Sensor1
+O3 indice: 62.4654 - Niveau: Bon
+SO2 indice: 35.7256 - Niveau: Tres bon
+NO2 indice: 61.6981 - Niveau: Bon
+PM10 indice: 52.8159 - Niveau: Mauvais
+2. Sensor ID: Sensor9
+O3 indice: 40.7729 - Niveau: Tres bon
+SO2 indice: 48.0659 - Niveau: Tres bon
+NO2 indice: 57.9168 - Niveau: Bon
+PM10 indice: 52.6888 - Niveau: Mauvais
+3. Sensor ID: Sensor10
+O3 indice: 41.0492 - Niveau: Tres bon
+SO2 indice: 47.5596 - Niveau: Tres bon
+NO2 indice: 71.9638 - Niveau: Bon
+PM10 indice: 50.7092 - Niveau: Mauvais
+4. Sensor ID: Sensor11
+O3 indice: 46.031 - Niveau: Tres bon
+SO2 indice: 44.4634 - Niveau: Tres bon
+NO2 indice: 60.8083 - Niveau: Bon
+PM10 indice: 55.9197 - Niveau: Mauvais
+5. Sensor ID: Sensor14
+O3 indice: 43.3653 - Niveau: Tres bon
+SO2 indice: 49.9242 - Niveau: Tres bon
+NO2 indice: 63.1233 - Niveau: Bon
+PM10 indice: 39.6476 - Niveau: Mediocre
+6. Sensor ID: Sensor23
+O3 indice: 41.182 - Niveau: Tres bon
+SO2 indice: 45.1992 - Niveau: Tres bon
+NO2 indice: 61.9028 - Niveau: Bon
+PM10 indice: 53.1452 - Niveau: Mauvais
+7. Sensor ID: Sensor24
+O3 indice: 53.1843 - Niveau: Tres bon
+SO2 indice: 50.0072 - Niveau: Tres bon
+NO2 indice: 62.6127 - Niveau: Bon
+PM10 indice: 47.4452 - Niveau: Mediocre
+
+--- Menu Admin ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Classer les capteurs par similarité
+4. Vérifier l'impact d'un produit fournisseur
+5. Vérifier le score d'un utilisateur
+6. Vérifier les capteurs défaillants
+7. Identifier les zones à qualité similaire
+8. Mesurer l'efficacité d'un algorithme
+0. Quitter
+Votre choix : Merci d'avoir utilisé AirWatcher !

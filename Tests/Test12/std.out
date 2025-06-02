@@ -1,0 +1,22 @@
+[INFO] Données chargées avec succès.
+Bienvenue dans AirWatcher !
+Êtes-vous :
+1. Admin
+2. User
+3. Provider
+Votre choix : 
+--- Menu Utilisateur ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Vérifier votre score
+4. Identifier les zones à qualité similaire
+0. Quitter
+Votre choix : Votre ID utilisateur : Votre score : 0
+
+--- Menu Utilisateur ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Vérifier votre score
+4. Identifier les zones à qualité similaire
+0. Quitter
+Votre choix : Merci d'avoir utilisé AirWatcher !
