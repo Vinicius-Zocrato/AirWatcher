@@ -5,10 +5,14 @@ Bienvenue dans AirWatcher !
 2. User
 3. Provider
 Votre choix : 
---- Menu Utilisateur ---
+--- Menu Admin ---
 1. Calculer la qualité de l'air dans une zone
 2. Calculer la qualité de l'air à une position
-3. Vérifier votre score
-4. Identifier les zones à qualité similaire
+3. Classer les capteurs par similarité
+4. Vérifier l'impact d'un produit fournisseur
+5. Vérifier le score d'un utilisateur
+6. Vérifier les capteurs défaillants
+7. Identifier les zones à qualité similaire
+8. Mesurer l'efficacité d'un algorithme
 0. Quitter
 Votre choix : Merci d'avoir utilisé AirWatcher !

@@ -1,0 +1,21 @@
+[INFO] Données chargées avec succès.
+Bienvenue dans AirWatcher !
+Êtes-vous :
+1. Admin
+2. User
+3. Provider
+Votre choix : 
+--- Menu Admin ---
+1. Calculer la qualité de l'air dans une zone
+2. Calculer la qualité de l'air à une position
+3. Classer les capteurs par similarité
+4. Vérifier l'impact d'un produit fournisseur
+5. Vérifier le score d'un utilisateur
+6. Vérifier les capteurs défaillants
+7. Identifier les zones à qualité similaire
+8. Mesurer l'efficacité d'un algorithme
+0. Quitter
+Votre choix : Rayon (km) : Latitude : Longitude : Date début (YYYY MM DD HH mm ss) : Date fin (YYYY MM DD HH mm ss) : [AVERTISSEMENT] Aucune mesure trouvée dans l'intervalle de temps spécifié.
+utilized sensors
+Sensor3 Sensor4 Sensor5 Sensor6 Sensor7 Sensor8 Sensor9 Sensor13 Sensor14 Sensor15 Sensor16 Sensor17 Sensor18 Sensor19 Sensor24 Sensor25 Sensor26 Sensor27 Sensor28 Sensor29 Sensor34 Sensor35 Sensor36 Sensor37 Sensor38 Sensor39 Sensor44 Sensor45 Sensor46 Sensor47 Sensor48 Sensor49 Sensor55 Sensor56 Sensor57 Sensor58 Sensor59 Sensor65 Sensor66 Sensor67 Sensor68 Sensor69 Sensor76 Sensor77 Sensor78 Sensor79 Sensor86 Sensor87 Sensor88 Sensor89 Sensor97 Sensor98 Sensor99 
+Air quality analisys results for latitude: 40, longitude: 10, time: 1902-01-01 00:00:00 to 1904-04-01 00:00:00
